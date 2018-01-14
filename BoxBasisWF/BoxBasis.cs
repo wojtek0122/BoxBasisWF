@@ -57,7 +57,10 @@ namespace BoxBasisWF
 
         private void DataReceivedLog()
         {
-            Message("RECEIVED", connection.port.ReadLine());
+            string data = connection.port.ReadLine();
+            Int32.TryParse(data, out int intdata);
+            pBar.Value = intdata;
+            Message("RECEIVED", data);
         }
 
         public void Message(string type, string message)
@@ -84,6 +87,7 @@ namespace BoxBasisWF
                     }
             }
             console_txt_log.SelectionColor = Color.Black;
+            console_txt_log.ScrollToCaret();
         }
 
         private void options_btn_connect_Click(object sender, EventArgs e)

@@ -60,7 +60,7 @@
             this.picBox_board = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.console_txt_log = new System.Windows.Forms.RichTextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pBar = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
@@ -400,15 +400,15 @@
             this.console_txt_log.TabIndex = 1;
             this.console_txt_log.Text = "";
             // 
-            // progressBar1
+            // pBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(7, 8);
-            this.progressBar1.Maximum = 200;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(634, 21);
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 4;
+            this.pBar.Location = new System.Drawing.Point(7, 8);
+            this.pBar.Maximum = 200;
+            this.pBar.Name = "pBar";
+            this.pBar.Size = new System.Drawing.Size(634, 21);
+            this.pBar.Step = 1;
+            this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pBar.TabIndex = 4;
             // 
             // label3
             // 
@@ -435,7 +435,7 @@
             this.ClientSize = new System.Drawing.Size(935, 404);
             this.Controls.Add(this.picBox_Connection);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.pBar);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -468,7 +468,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.PictureBox picBox_board;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar pBar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picBox_Connection;
         private System.Windows.Forms.Button menu_btn_start;
