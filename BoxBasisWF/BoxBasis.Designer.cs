@@ -38,6 +38,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.options_cb_port = new System.Windows.Forms.ComboBox();
+            this.options_cb_baudrate = new System.Windows.Forms.ComboBox();
+            this.options_cb_databits = new System.Windows.Forms.ComboBox();
+            this.options_cb_parity = new System.Windows.Forms.ComboBox();
+            this.options_cb_stopbits = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.options_btn_disconnect = new System.Windows.Forms.Button();
@@ -51,22 +57,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picBox_board = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.console_txt_log = new System.Windows.Forms.RichTextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.options_cb_stopbits = new System.Windows.Forms.ComboBox();
-            this.options_cb_parity = new System.Windows.Forms.ComboBox();
-            this.options_cb_databits = new System.Windows.Forms.ComboBox();
-            this.options_cb_baudrate = new System.Windows.Forms.ComboBox();
-            this.options_cb_port = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_board)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).BeginInit();
             this.SuspendLayout();
@@ -94,7 +94,6 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(134, 20);
             this.textBox7.TabIndex = 14;
-            this.textBox7.Text = "P00120366";
             // 
             // textBox6
             // 
@@ -102,7 +101,6 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(134, 20);
             this.textBox6.TabIndex = 13;
-            this.textBox6.Text = "431256";
             // 
             // label5
             // 
@@ -149,6 +147,7 @@
             this.button3.TabIndex = 8;
             this.button3.Text = "Save";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -185,6 +184,75 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Options";
+            // 
+            // options_cb_port
+            // 
+            this.options_cb_port.FormattingEnabled = true;
+            this.options_cb_port.Location = new System.Drawing.Point(62, 11);
+            this.options_cb_port.Name = "options_cb_port";
+            this.options_cb_port.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_port.TabIndex = 22;
+            // 
+            // options_cb_baudrate
+            // 
+            this.options_cb_baudrate.FormattingEnabled = true;
+            this.options_cb_baudrate.Items.AddRange(new object[] {
+            "2400",
+            "4800",
+            "9600",
+            "14400",
+            "19200",
+            "28800",
+            "38400",
+            "57600",
+            "76800",
+            "115200",
+            "230400"});
+            this.options_cb_baudrate.Location = new System.Drawing.Point(62, 34);
+            this.options_cb_baudrate.Name = "options_cb_baudrate";
+            this.options_cb_baudrate.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_baudrate.TabIndex = 21;
+            this.options_cb_baudrate.Text = "9600";
+            // 
+            // options_cb_databits
+            // 
+            this.options_cb_databits.FormattingEnabled = true;
+            this.options_cb_databits.Items.AddRange(new object[] {
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.options_cb_databits.Location = new System.Drawing.Point(62, 57);
+            this.options_cb_databits.Name = "options_cb_databits";
+            this.options_cb_databits.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_databits.TabIndex = 20;
+            this.options_cb_databits.Text = "8";
+            // 
+            // options_cb_parity
+            // 
+            this.options_cb_parity.FormattingEnabled = true;
+            this.options_cb_parity.Location = new System.Drawing.Point(62, 80);
+            this.options_cb_parity.Name = "options_cb_parity";
+            this.options_cb_parity.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_parity.TabIndex = 19;
+            // 
+            // options_cb_stopbits
+            // 
+            this.options_cb_stopbits.FormattingEnabled = true;
+            this.options_cb_stopbits.Location = new System.Drawing.Point(62, 103);
+            this.options_cb_stopbits.Name = "options_cb_stopbits";
+            this.options_cb_stopbits.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_stopbits.TabIndex = 18;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 108);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 13);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Stop bits:";
             // 
             // label10
             // 
@@ -297,22 +365,22 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.pictureBox1);
+            this.groupBox3.Controls.Add(this.picBox_board);
             this.groupBox3.Location = new System.Drawing.Point(7, 31);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(634, 226);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
-            // pictureBox1
+            // picBox_board
             // 
-            this.pictureBox1.Image = global::BoxBasisWF.Properties.Resources._1;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(622, 207);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.WaitOnLoad = true;
+            this.picBox_board.Image = global::BoxBasisWF.Properties.Resources._1;
+            this.picBox_board.Location = new System.Drawing.Point(6, 10);
+            this.picBox_board.Name = "picBox_board";
+            this.picBox_board.Size = new System.Drawing.Size(622, 207);
+            this.picBox_board.TabIndex = 0;
+            this.picBox_board.TabStop = false;
+            this.picBox_board.WaitOnLoad = true;
             // 
             // groupBox4
             // 
@@ -360,75 +428,6 @@
             this.picBox_Connection.TabIndex = 6;
             this.picBox_Connection.TabStop = false;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 108);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(51, 13);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Stop bits:";
-            // 
-            // options_cb_stopbits
-            // 
-            this.options_cb_stopbits.FormattingEnabled = true;
-            this.options_cb_stopbits.Location = new System.Drawing.Point(62, 103);
-            this.options_cb_stopbits.Name = "options_cb_stopbits";
-            this.options_cb_stopbits.Size = new System.Drawing.Size(55, 21);
-            this.options_cb_stopbits.TabIndex = 18;
-            // 
-            // options_cb_parity
-            // 
-            this.options_cb_parity.FormattingEnabled = true;
-            this.options_cb_parity.Location = new System.Drawing.Point(62, 80);
-            this.options_cb_parity.Name = "options_cb_parity";
-            this.options_cb_parity.Size = new System.Drawing.Size(55, 21);
-            this.options_cb_parity.TabIndex = 19;
-            // 
-            // options_cb_databits
-            // 
-            this.options_cb_databits.FormattingEnabled = true;
-            this.options_cb_databits.Items.AddRange(new object[] {
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.options_cb_databits.Location = new System.Drawing.Point(62, 57);
-            this.options_cb_databits.Name = "options_cb_databits";
-            this.options_cb_databits.Size = new System.Drawing.Size(55, 21);
-            this.options_cb_databits.TabIndex = 20;
-            this.options_cb_databits.Text = "8";
-            // 
-            // options_cb_baudrate
-            // 
-            this.options_cb_baudrate.FormattingEnabled = true;
-            this.options_cb_baudrate.Items.AddRange(new object[] {
-            "2400",
-            "4800",
-            "9600",
-            "14400",
-            "19200",
-            "28800",
-            "38400",
-            "57600",
-            "76800",
-            "115200",
-            "230400"});
-            this.options_cb_baudrate.Location = new System.Drawing.Point(62, 34);
-            this.options_cb_baudrate.Name = "options_cb_baudrate";
-            this.options_cb_baudrate.Size = new System.Drawing.Size(55, 21);
-            this.options_cb_baudrate.TabIndex = 21;
-            this.options_cb_baudrate.Text = "9600";
-            // 
-            // options_cb_port
-            // 
-            this.options_cb_port.FormattingEnabled = true;
-            this.options_cb_port.Location = new System.Drawing.Point(62, 11);
-            this.options_cb_port.Name = "options_cb_port";
-            this.options_cb_port.Size = new System.Drawing.Size(55, 21);
-            this.options_cb_port.TabIndex = 22;
-            // 
             // BoxBasis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,7 +450,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox_board)).EndInit();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).EndInit();
             this.ResumeLayout(false);
@@ -468,7 +467,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picBox_board;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picBox_Connection;

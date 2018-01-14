@@ -15,6 +15,8 @@ namespace BoxBasisWF
         private Connection connection;
         delegate void DataReceived();
         DataReceived received;
+        private Graphics graphics;
+        private Pen pen = new Pen(Color.Red, 2F);
 
         public BoxBasis()
         {
@@ -120,5 +122,21 @@ namespace BoxBasisWF
             connection.port.Write("test");
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            graphics = picBox_board.CreateGraphics();
+            //socket
+            graphics.DrawRectangle(pen, 5, 30, 125, 115);
+            //mjd
+            graphics.DrawRectangle(pen, 145, 75, 70, 55);
+            //capacitors
+            graphics.DrawRectangle(pen, 200, 10, 240, 180);
+            //ferrocore
+            graphics.DrawRectangle(pen, 445, 35, 60, 60);
+            //stabilizer
+            graphics.DrawRectangle(pen, 510, 25, 45, 45);
+            //k2231
+            graphics.DrawRectangle(pen, 435, 105, 80, 50);
+        }
     }
 }
