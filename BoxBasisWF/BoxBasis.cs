@@ -43,9 +43,18 @@ namespace BoxBasisWF
             options_cb_parity.Items.Clear();
             options_cb_stopbits.Items.Clear();
             foreach (String s in System.IO.Ports.SerialPort.GetPortNames()) options_cb_port.Items.Add(s);
+            try
+            {
+                options_cb_port.Text = options_cb_port.Items[0].ToString();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Message("ERROR", "Nie znaleziono żadnych portów COM!");
+            }
+            
+
             foreach (String s in Enum.GetNames(typeof(System.IO.Ports.Parity))) options_cb_parity.Items.Add(s);
             foreach (String s in Enum.GetNames(typeof(System.IO.Ports.StopBits))) options_cb_stopbits.Items.Add(s);
-            options_cb_port.Text = options_cb_port.Items[0].ToString();
             options_cb_parity.Text = options_cb_parity.Items[0].ToString();
             options_cb_stopbits.Text = options_cb_stopbits.Items[1].ToString();
         }
@@ -141,6 +150,12 @@ namespace BoxBasisWF
             graphics.DrawRectangle(pen, 510, 25, 45, 45);
             //k2231
             graphics.DrawRectangle(pen, 435, 105, 80, 50);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ExcelReport report;
+            report = new ExcelReport();
         }
     }
 }

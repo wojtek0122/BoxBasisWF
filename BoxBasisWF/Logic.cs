@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 namespace BoxBasisWF
 {
 
+    class Packet
+    {
+
+    }
+
     class Logic
     {
-        
-
 
     }
 }
