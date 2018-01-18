@@ -55,6 +55,7 @@
     <Compile Include="BoxBasis.Designer.cs">
       <DependentUpon>BoxBasis.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataPacket.cs" />
     <Compile Include="ExcelReport.cs" />
     <Compile Include="Logic.cs" />
     <Compile Include="Program.cs" />

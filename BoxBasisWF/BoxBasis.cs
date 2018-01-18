@@ -17,13 +17,19 @@ namespace BoxBasisWF
         DataReceived received;
         private Graphics graphics;
         private Pen pen = new Pen(Color.Red, 2F);
+        ExcelReport report;
+        DataPacket data;
+        DataPacket.Packet receivedPacket;
 
         public BoxBasis()
         {
             InitializeComponent();
 
             InitializeOptionsLists();
-            
+
+            report = new ExcelReport();
+            data = new DataPacket();
+
             try
             {
                 connection = new Connection(options_cb_port.Text, options_cb_baudrate.Text);
@@ -66,10 +72,35 @@ namespace BoxBasisWF
 
         private void DataReceivedLog()
         {
-            string data = connection.port.ReadLine();
-            Int32.TryParse(data, out int intdata);
-            pBar.Value = intdata;
-            Message("RECEIVED", data);
+            /*
+            public int DataPacketID;
+            public byte ID;
+            public float VCCVoltage;
+            public bool BasisSwitch;
+            public bool TesterSwitch;
+            public float CapacitorVoltage;
+            */
+
+            Int32.TryParse(connection.port.ReadLine(), out receivedPacket.DataPacketID);
+            Byte.TryParse(connection.port.ReadLine(), out receivedPacket.ID);
+            float.TryParse(connection.port.ReadLine(), out receivedPacket.VCCVoltage);
+            Boolean.TryParse(connection.port.ReadLine(), out receivedPacket.BasisSwitch);
+            Boolean.TryParse(connection.port.ReadLine(), out receivedPacket.TesterSwitch);
+            float.TryParse(connection.port.ReadLine(), out receivedPacket.CapacitorVoltage);            
+      
+            data.AddPacketToArrayList(receivedPacket);
+
+            Message("RECEIVED", receivedPacket.DataPacketID.ToString());
+            Message("RECEIVED", receivedPacket.ID.ToString());
+            Message("RECEIVED", receivedPacket.VCCVoltage.ToString());
+            Message("RECEIVED", receivedPacket.BasisSwitch.ToString());
+            Message("RECEIVED", receivedPacket.TesterSwitch.ToString());
+            Message("RECEIVED", receivedPacket.CapacitorVoltage.ToString());
+
+            //string data = connection.port.ReadLine();
+            //Int32.TryParse(data, out int intdata);
+            //pBar.Value = intdata;
+            //Message("RECEIVED", data);
         }
 
         public void Message(string type, string message)
@@ -85,7 +116,7 @@ namespace BoxBasisWF
                 case "RECEIVED":
                     {
                         console_txt_log.SelectionColor = Color.Indigo;
-                        console_txt_log.AppendText(DateTime.Now.ToString() + " >> RECEIVED: " + message);
+                        console_txt_log.AppendText(DateTime.Now.ToString() + " >> RECEIVED: " + message + Environment.NewLine);
                         break;
                     }
                 case "ERROR":
@@ -133,6 +164,7 @@ namespace BoxBasisWF
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
             connection.port.Write("test");
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -154,8 +186,7 @@ namespace BoxBasisWF
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ExcelReport report;
-            report = new ExcelReport();
+            
         }
     }
 }
