@@ -72,6 +72,7 @@ namespace BoxBasisWF
 
         private void DataReceivedLog()
         {
+            
             /*
             public int DataPacketID;
             public byte ID;
@@ -80,7 +81,7 @@ namespace BoxBasisWF
             public bool TesterSwitch;
             public float CapacitorVoltage;
             */
-
+            /*
             Int32.TryParse(connection.port.ReadLine(), out receivedPacket.DataPacketID);
             Byte.TryParse(connection.port.ReadLine(), out receivedPacket.ID);
             float.TryParse(connection.port.ReadLine(), out receivedPacket.VCCVoltage);
@@ -101,6 +102,7 @@ namespace BoxBasisWF
             //Int32.TryParse(data, out int intdata);
             //pBar.Value = intdata;
             //Message("RECEIVED", data);
+            */
         }
 
         public void Message(string type, string message)
