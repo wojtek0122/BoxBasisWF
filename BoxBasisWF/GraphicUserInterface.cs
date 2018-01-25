@@ -128,7 +128,6 @@ namespace BoxBasisWF
         private void options_btn_connect_Click(object sender, EventArgs e)
         {
             _boxBasisController.Setup(this, _connectionData);
-            _boxBasisController.Connect();
             
             if(_boxBasisController.IsConnected())
             {
@@ -155,7 +154,7 @@ namespace BoxBasisWF
 
         private void options_btn_disconnect_Click(object sender, EventArgs e)
         {
-            _boxBasisController.Disconnect();
+            _boxBasisController.Exit();
             if (!_boxBasisController.IsConnected())
             {
                 picBox_Connection.BackColor = Color.Red;
@@ -164,5 +163,6 @@ namespace BoxBasisWF
             options_btn_disconnect.Enabled = false;
             options_btn_connect.Enabled = true;
         }
+
     }
 }

@@ -31,8 +31,8 @@ namespace BoxBasisWF
             _GUI = graphicUserInterface;
             _connectionData = connectionData;
 
-            // -------------- WINFORMS SETTINGS --------------------
             _serialTransport = new SerialTransport();
+            // -------------- WINFORMS SETTINGS --------------------
             SetSerialSettings();
 
             _cmdMessenger = new CmdMessenger(_serialTransport, BoardType.Bit16);
@@ -40,6 +40,7 @@ namespace BoxBasisWF
             AttachCommandCallBacks();
             _cmdMessenger.NewLineReceived += NewLineReceived;
             _cmdMessenger.NewLineSent += NewLineSent;
+            _cmdMessenger.Connect();
 
             //_GUI.SetLedState(true);
             //_GUI.SetFrequency(2);
@@ -53,16 +54,6 @@ namespace BoxBasisWF
             _serialTransport.CurrentSerialSettings.DtrEnable = _connectionData.DtrEnabled;
             _serialTransport.CurrentSerialSettings.Parity = _connectionData.Parity;
             _serialTransport.CurrentSerialSettings.StopBits = _connectionData.StopBits;
-        }
-
-        public void Connect()
-        {
-            _cmdMessenger.Connect();
-        }
-
-        public void Disconnect()
-        {
-            _cmdMessenger.Disconnect();
         }
 
         public bool IsConnected()
