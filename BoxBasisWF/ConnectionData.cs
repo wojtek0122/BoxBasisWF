@@ -11,6 +11,5 @@ namespace BoxBasisWF
         public System.IO.Ports.Parity Parity { get; set; }
         public string PortName { get; set; }
         public System.IO.Ports.StopBits StopBits { get; set; }
-        public int Timeout { get; set; }
     }
 }

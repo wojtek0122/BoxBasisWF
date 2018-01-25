@@ -53,7 +53,6 @@ namespace BoxBasisWF
             _serialTransport.CurrentSerialSettings.DtrEnable = _connectionData.DtrEnabled;
             _serialTransport.CurrentSerialSettings.Parity = _connectionData.Parity;
             _serialTransport.CurrentSerialSettings.StopBits = _connectionData.StopBits;
-            _serialTransport.CurrentSerialSettings.Timeout = _connectionData.Timeout;
         }
 
         public void Connect()
