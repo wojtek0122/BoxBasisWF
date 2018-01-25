@@ -4,6 +4,7 @@ namespace BoxBasisWF
 {
     class DataPacket
     {
+        /*
         public struct Packet
         {
             public int DataPacketID;
@@ -30,5 +31,6 @@ namespace BoxBasisWF
         { 
             return (Packet) Packets[number];
         }
+        */
     }
 }

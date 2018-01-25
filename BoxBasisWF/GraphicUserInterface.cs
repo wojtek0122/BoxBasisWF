@@ -10,25 +10,25 @@ using System.Windows.Forms;
 
 namespace BoxBasisWF
 {
-    public partial class BoxBasis : Form
+    public partial class GraphicUserInterface : Form
     {
         private Connection connection;
         delegate void DataReceived();
         DataReceived received;
         private Graphics graphics;
         private Pen pen = new Pen(Color.Red, 2F);
-        ExcelReport report;
-        DataPacket data;
-        DataPacket.Packet receivedPacket;
+        //ExcelReport report;
+        //DataPacket data;
+        //DataPacket.Packet receivedPacket;
 
-        public BoxBasis()
+        public GraphicUserInterface()
         {
             InitializeComponent();
 
             InitializeOptionsLists();
 
-            report = new ExcelReport();
-            data = new DataPacket();
+            //report = new ExcelReport();
+            //data = new DataPacket();
 
             try
             {

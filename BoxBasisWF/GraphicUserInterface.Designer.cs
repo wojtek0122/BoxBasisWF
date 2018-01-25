@@ -1,6 +1,6 @@
 ﻿namespace BoxBasisWF
 {
-    partial class BoxBasis
+    partial class GraphicUserInterface
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -375,7 +375,7 @@
             // 
             // picBox_board
             // 
-            this.picBox_board.Image = global::BoxBasisWF.Properties.Resources._1;
+            this.picBox_board.Image = global::BoxBasisWF.Properties.Resources.board;
             this.picBox_board.Location = new System.Drawing.Point(6, 10);
             this.picBox_board.Name = "picBox_board";
             this.picBox_board.Size = new System.Drawing.Size(622, 207);
@@ -429,7 +429,7 @@
             this.picBox_Connection.TabIndex = 6;
             this.picBox_Connection.TabStop = false;
             // 
-            // BoxBasis
+            // GraphicUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -444,7 +444,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "BoxBasis";
+            this.Name = "GraphicUserInterface";
             this.Text = "BoxBasis";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
