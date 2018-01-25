@@ -77,6 +77,12 @@ namespace BoxBasisWF
                         console_txt_log.AppendText(DateTime.Now.ToString() + " >> ERROR: " + message + Environment.NewLine);
                         break;
                     }
+                case "INFO":
+                    {
+                        console_txt_log.SelectionColor = Color.Gray;
+                        console_txt_log.AppendText(DateTime.Now.ToString() + " >> INFO: " + message + Environment.NewLine);
+                        break;
+                    }
             }
             console_txt_log.SelectionColor = Color.Black;
             console_txt_log.ScrollToCaret();
@@ -99,14 +105,20 @@ namespace BoxBasisWF
             graphics.DrawRectangle(pen, 435, 105, 80, 50);
         }
 
+        public void SetCoilState(bool coilState)
+        {
+            checkBox1.Checked = coilState;
+        }
+
         public void SetLedState(bool ledState)
         {
-            checkBox1.Checked = ledState;
+            //checkBox1.Checked = ledState;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            _boxBasisController.SetLedState(checkBox1.Checked);
+            //_boxBasisController.SetLedState(checkBox1.Checked);
+            _boxBasisController.SetCoilState(checkBox1.Checked);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)

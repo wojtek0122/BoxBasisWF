@@ -11,6 +11,7 @@ namespace BoxBasisWF
         Error,                  //Command to messge that an error has occured
         SetLed,                 //Command to turn led ON or OFF
         SetLedFrequency,        //Command to set led blink frequency
+        SetCoil,
     };
 
     public class BoxBasisController
@@ -73,6 +74,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach(OnUnknownCommand);
             _cmdMessenger.Attach((int)Command.Acknowledge, OnAcknowledge);
             _cmdMessenger.Attach((int)Command.Error, OnError);
+            _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
         }
 
         // ----------------------- CALLBACKS -----------------------
@@ -92,7 +94,13 @@ namespace BoxBasisWF
         void OnError(ReceivedCommand arguments)
         {
             _GUI.Message("ERROR", @"Arduino has experienced an error");
-           Console.WriteLine(@"Arduino has experienced an error");
+            Console.WriteLine(@"Arduino has experienced an error");
+        }
+
+        void OnCoil(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Coil state changed");
+            Console.WriteLine(@"Coil state changed");
         }
 
         private void NewLineReceived(object sender, CommandEventArgs e)
@@ -120,6 +128,13 @@ namespace BoxBasisWF
 
             // Send command
             _cmdMessenger.SendCommand(new SendCommand((int)Command.SetLed, ledState));
+        }
+
+        public void SetCoilState(bool coilState)
+        {
+            var command = new SendCommand((int)Command.SetCoil, coilState);
+            _cmdMessenger.SendCommand(new SendCommand((int)Command.SetCoil, coilState));
+
         }
 
     }
