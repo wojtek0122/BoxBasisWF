@@ -13,7 +13,7 @@ namespace BoxBasisWF
         SetLedFrequency,        //Command to set led blink frequency
     };
 
-    class BoxBasisController
+    public class BoxBasisController
     {
         //Variables
 
