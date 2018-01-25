@@ -63,16 +63,21 @@
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_board)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.trackBar1);
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.textBox7);
             this.groupBox1.Controls.Add(this.textBox6);
             this.groupBox1.Controls.Add(this.label5);
@@ -128,7 +133,6 @@
             this.menu_btn_start.TabIndex = 10;
             this.menu_btn_start.Text = "Start";
             this.menu_btn_start.UseVisualStyleBackColor = true;
-            this.menu_btn_start.Click += new System.EventHandler(this.menu_btn_start_Click);
             // 
             // button4
             // 
@@ -157,7 +161,6 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Stop";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox2
             // 
@@ -282,7 +285,6 @@
             this.options_btn_disconnect.TabIndex = 11;
             this.options_btn_disconnect.Text = "Disonnect";
             this.options_btn_disconnect.UseVisualStyleBackColor = true;
-            this.options_btn_disconnect.Click += new System.EventHandler(this.options_btn_disconnect_Click);
             // 
             // options_btn_connect
             // 
@@ -292,7 +294,6 @@
             this.options_btn_connect.TabIndex = 10;
             this.options_btn_connect.Text = "Connect";
             this.options_btn_connect.UseVisualStyleBackColor = true;
-            this.options_btn_connect.Click += new System.EventHandler(this.options_btn_connect_Click);
             // 
             // label8
             // 
@@ -344,7 +345,6 @@
             this.options_btn_save.Size = new System.Drawing.Size(75, 23);
             this.options_btn_save.TabIndex = 12;
             this.options_btn_save.Text = "Save";
-            this.options_btn_save.Click += new System.EventHandler(this.options_btn_save_Click);
             // 
             // label2
             // 
@@ -429,6 +429,25 @@
             this.picBox_Connection.TabIndex = 6;
             this.picBox_Connection.TabStop = false;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 78);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(14, 103);
+            this.trackBar1.Maximum = 250;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(247, 45);
+            this.trackBar1.TabIndex = 16;
+            this.trackBar1.TickFrequency = 10;
+            // 
             // GraphicUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,6 +473,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBox_board)).EndInit();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -496,6 +516,8 @@
         private System.Windows.Forms.ComboBox options_cb_parity;
         private System.Windows.Forms.ComboBox options_cb_stopbits;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
