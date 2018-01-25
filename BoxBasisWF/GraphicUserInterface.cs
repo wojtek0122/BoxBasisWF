@@ -121,6 +121,12 @@ namespace BoxBasisWF
                         console_txt_log.AppendText(DateTime.Now.ToString() + " >> RECEIVED: " + message + Environment.NewLine);
                         break;
                     }
+                case "SEND":
+                    {
+                        console_txt_log.SelectionColor = Color.Purple;
+                        console_txt_log.AppendText(DateTime.Now.ToString() + " >> SEND: " + message + Environment.NewLine);
+                        break;
+                    }
                 case "ERROR":
                     {
                         console_txt_log.SelectionColor = Color.Red;
@@ -165,7 +171,6 @@ namespace BoxBasisWF
 
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
-            connection.port.Write("test");
 
         }
 
