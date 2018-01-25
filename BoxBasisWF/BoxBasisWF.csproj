@@ -57,7 +57,7 @@
     <Compile Include="GraphicUserInterface.Designer.cs">
       <DependentUpon>GraphicUserInterface.cs</DependentUpon>
     </Compile>
-    <Compile Include="Obsolete\Connection.cs" />
+    <Compile Include="ConnectionData.cs" />
     <Compile Include="Obsolete\DataPacket.cs" />
     <Compile Include="Obsolete\ExcelReport.cs" />
     <Compile Include="Program.cs" />

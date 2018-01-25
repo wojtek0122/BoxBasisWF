@@ -13,6 +13,7 @@ namespace BoxBasisWF
     public partial class GraphicUserInterface : Form
     {
         private readonly BoxBasisController _boxBasisController;
+        private ConnectionData _connectionData;
         private double _ledFrequency;
 
         //Drawing rectangle on the picture
@@ -24,7 +25,7 @@ namespace BoxBasisWF
             InitializeComponent();
             InitializeOptionsLists();
             _boxBasisController = new BoxBasisController();
-            //_boxBasisController.Setup(this);
+            _connectionData = new ConnectionData();
         }
 
         private void InitializeOptionsLists()
@@ -42,7 +43,6 @@ namespace BoxBasisWF
                 Message("ERROR", "Nie znaleziono żadnych portów COM!");
             }
             
-
             foreach (String s in Enum.GetNames(typeof(System.IO.Ports.Parity))) options_cb_parity.Items.Add(s);
             foreach (String s in Enum.GetNames(typeof(System.IO.Ports.StopBits))) options_cb_stopbits.Items.Add(s);
             options_cb_parity.Text = options_cb_parity.Items[0].ToString();
@@ -84,7 +84,6 @@ namespace BoxBasisWF
 
         private void button3_Click(object sender, EventArgs e)
         {
-            _boxBasisController.Setup(this);
             graphics = picBox_board.CreateGraphics();
             //socket
             graphics.DrawRectangle(pen, 5, 30, 125, 115);
@@ -124,6 +123,46 @@ namespace BoxBasisWF
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             trackBar1_Scroll(sender, e);
+        }
+
+        private void options_btn_connect_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.Setup(this, _connectionData);
+            _boxBasisController.Connect();
+            
+            if(_boxBasisController.IsConnected())
+            {
+                picBox_Connection.BackColor = Color.Green;
+            }
+
+            options_btn_disconnect.Enabled = true;
+            options_btn_connect.Enabled = false;
+        }
+
+        private void options_btn_save_Click(object sender, EventArgs e)
+        {
+            _connectionData.PortName = options_cb_port.Text.ToString();
+            Int32.TryParse(options_cb_baudrate.Text, out var value);
+            _connectionData.BaudRate = value;
+            Int32.TryParse(options_cb_databits.Text, out value);
+            _connectionData.DataBits = value;
+            _connectionData.DtrEnabled = true;
+            _connectionData.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), options_cb_parity.Text);
+            _connectionData.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), options_cb_stopbits.Text);
+
+            options_btn_connect.Enabled = true;
+        }
+
+        private void options_btn_disconnect_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.Disconnect();
+            if (!_boxBasisController.IsConnected())
+            {
+                picBox_Connection.BackColor = Color.Red;
+            }
+
+            options_btn_disconnect.Enabled = false;
+            options_btn_connect.Enabled = true;
         }
     }
 }

@@ -20,31 +20,55 @@ namespace BoxBasisWF
         private SerialTransport         _serialTransport;
         private CmdMessenger            _cmdMessenger;
         private GraphicUserInterface    _GUI;
+        private ConnectionData          _connectionData;
 
         // ----------------------- MAIN -----------------------
 
         //Setup function
-        public void Setup(GraphicUserInterface graphicUserInterface)
+        public void Setup(GraphicUserInterface graphicUserInterface, ConnectionData connectionData)
         {
 
             _GUI = graphicUserInterface;
+            _connectionData = connectionData;
 
-            // -------------- 1. WINFORMS DATA --------------------
-            //Przerobić na pobieranie danych z winformsa
-            _serialTransport = new SerialTransport
-            {
-                CurrentSerialSettings = { PortName = "COM3", BaudRate = 115200 }
-            };
+            // -------------- WINFORMS SETTINGS --------------------
+            _serialTransport = new SerialTransport();
+            SetSerialSettings();
 
             _cmdMessenger = new CmdMessenger(_serialTransport, BoardType.Bit16);
             _cmdMessenger.ControlToInvokeOn = _GUI;
             AttachCommandCallBacks();
             _cmdMessenger.NewLineReceived += NewLineReceived;
             _cmdMessenger.NewLineSent += NewLineSent;
-            _cmdMessenger.Connect();
 
-            _GUI.SetLedState(true);
-            _GUI.SetFrequency(2);
+            //_GUI.SetLedState(true);
+            //_GUI.SetFrequency(2);
+        }
+
+        public void SetSerialSettings()
+        {
+            _serialTransport.CurrentSerialSettings.PortName = _connectionData.PortName;
+            _serialTransport.CurrentSerialSettings.BaudRate = _connectionData.BaudRate;
+            _serialTransport.CurrentSerialSettings.DataBits = _connectionData.DataBits;
+            _serialTransport.CurrentSerialSettings.DtrEnable = _connectionData.DtrEnabled;
+            _serialTransport.CurrentSerialSettings.Parity = _connectionData.Parity;
+            _serialTransport.CurrentSerialSettings.StopBits = _connectionData.StopBits;
+            _serialTransport.CurrentSerialSettings.Timeout = _connectionData.Timeout;
+        }
+
+        public void Connect()
+        {
+            _cmdMessenger.Connect();
+        }
+
+        public void Disconnect()
+        {
+            _cmdMessenger.Disconnect();
+        }
+
+        public bool IsConnected()
+        {
+            return _serialTransport.IsConnected();
         }
 
         public void Exit()

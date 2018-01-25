@@ -217,7 +217,7 @@
             this.options_cb_port.FormattingEnabled = true;
             this.options_cb_port.Location = new System.Drawing.Point(62, 11);
             this.options_cb_port.Name = "options_cb_port";
-            this.options_cb_port.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_port.Size = new System.Drawing.Size(69, 21);
             this.options_cb_port.TabIndex = 22;
             // 
             // options_cb_baudrate
@@ -237,7 +237,7 @@
             "230400"});
             this.options_cb_baudrate.Location = new System.Drawing.Point(62, 34);
             this.options_cb_baudrate.Name = "options_cb_baudrate";
-            this.options_cb_baudrate.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_baudrate.Size = new System.Drawing.Size(69, 21);
             this.options_cb_baudrate.TabIndex = 21;
             this.options_cb_baudrate.Text = "9600";
             // 
@@ -252,7 +252,7 @@
             "9"});
             this.options_cb_databits.Location = new System.Drawing.Point(62, 57);
             this.options_cb_databits.Name = "options_cb_databits";
-            this.options_cb_databits.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_databits.Size = new System.Drawing.Size(69, 21);
             this.options_cb_databits.TabIndex = 20;
             this.options_cb_databits.Text = "8";
             // 
@@ -261,7 +261,7 @@
             this.options_cb_parity.FormattingEnabled = true;
             this.options_cb_parity.Location = new System.Drawing.Point(62, 80);
             this.options_cb_parity.Name = "options_cb_parity";
-            this.options_cb_parity.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_parity.Size = new System.Drawing.Size(69, 21);
             this.options_cb_parity.TabIndex = 19;
             // 
             // options_cb_stopbits
@@ -269,7 +269,7 @@
             this.options_cb_stopbits.FormattingEnabled = true;
             this.options_cb_stopbits.Location = new System.Drawing.Point(62, 103);
             this.options_cb_stopbits.Name = "options_cb_stopbits";
-            this.options_cb_stopbits.Size = new System.Drawing.Size(55, 21);
+            this.options_cb_stopbits.Size = new System.Drawing.Size(69, 21);
             this.options_cb_stopbits.TabIndex = 18;
             // 
             // label11
@@ -308,15 +308,18 @@
             this.options_btn_disconnect.TabIndex = 11;
             this.options_btn_disconnect.Text = "Disonnect";
             this.options_btn_disconnect.UseVisualStyleBackColor = true;
+            this.options_btn_disconnect.Click += new System.EventHandler(this.options_btn_disconnect_Click);
             // 
             // options_btn_connect
             // 
+            this.options_btn_connect.Enabled = false;
             this.options_btn_connect.Location = new System.Drawing.Point(22, 126);
             this.options_btn_connect.Name = "options_btn_connect";
             this.options_btn_connect.Size = new System.Drawing.Size(75, 23);
             this.options_btn_connect.TabIndex = 10;
             this.options_btn_connect.Text = "Connect";
             this.options_btn_connect.UseVisualStyleBackColor = true;
+            this.options_btn_connect.Click += new System.EventHandler(this.options_btn_connect_Click);
             // 
             // label8
             // 
@@ -368,6 +371,7 @@
             this.options_btn_save.Size = new System.Drawing.Size(75, 23);
             this.options_btn_save.TabIndex = 12;
             this.options_btn_save.Text = "Save";
+            this.options_btn_save.Click += new System.EventHandler(this.options_btn_save_Click);
             // 
             // label2
             // 
