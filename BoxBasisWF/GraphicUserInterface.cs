@@ -14,7 +14,6 @@ namespace BoxBasisWF
     {
         private readonly BoxBasisController _boxBasisController;
         private ConnectionData _connectionData;
-        private double _ledFrequency;
 
         //Drawing rectangle on the picture
         private Graphics graphics;
@@ -105,38 +104,6 @@ namespace BoxBasisWF
             graphics.DrawRectangle(pen, 435, 105, 80, 50);
         }
 
-        public void SetCoilState(bool coilState)
-        {
-            checkBox1.Checked = coilState;
-        }
-
-        public void SetLedState(bool ledState)
-        {
-            //checkBox1.Checked = ledState;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            //_boxBasisController.SetLedState(checkBox1.Checked);
-            _boxBasisController.SetCoilState(checkBox1.Checked);
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            _ledFrequency = 0.4 + ((double)trackBar1.Value);
-            _boxBasisController.SetLedFrequency(_ledFrequency);
-        }
-
-        public void SetFrequency(double ledFrequency)
-        {
-            trackBar1.Value = (int)((ledFrequency - 0.4) * 2.5);
-        }
-
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            trackBar1_Scroll(sender, e);
-        }
-
         private void options_btn_connect_Click(object sender, EventArgs e)
         {
             _boxBasisController.Setup(this, _connectionData);
@@ -176,5 +143,9 @@ namespace BoxBasisWF
             options_btn_connect.Enabled = true;
         }
 
+        public void SetCoilState(bool coilState)
+        {
+            //checkBox1.Checked = coilState;
+        }
     }
 }

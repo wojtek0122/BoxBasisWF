@@ -5,13 +5,15 @@ using CommandMessenger.Transport.Serial;
 
 namespace BoxBasisWF
 {
+    //1. Dodaj komende do enum
     enum Command
     {
         Acknowledge,            //Command to acknowledge a received command
         Error,                  //Command to messge that an error has occured
-        SetLed,                 //Command to turn led ON or OFF
-        SetLedFrequency,        //Command to set led blink frequency
+        //SetLed,                 //Command to turn led ON or OFF
+        //SetLedFrequency,        //Command to set led blink frequency
         SetCoil,
+        SetMotor,
     };
 
     public class BoxBasisController
@@ -42,9 +44,6 @@ namespace BoxBasisWF
             _cmdMessenger.NewLineReceived += NewLineReceived;
             _cmdMessenger.NewLineSent += NewLineSent;
             _cmdMessenger.Connect();
-
-            //_GUI.SetLedState(true);
-            //_GUI.SetFrequency(2);
         }
 
         public void SetSerialSettings()
@@ -69,12 +68,14 @@ namespace BoxBasisWF
             _serialTransport.Dispose();
         }
 
+        //2. Przypisz callback do metody
         private void AttachCommandCallBacks()
         {
             _cmdMessenger.Attach(OnUnknownCommand);
             _cmdMessenger.Attach((int)Command.Acknowledge, OnAcknowledge);
             _cmdMessenger.Attach((int)Command.Error, OnError);
             _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
+            _cmdMessenger.Attach((int)Command.SetMotor, OnMotor);
         }
 
         // ----------------------- CALLBACKS -----------------------
@@ -97,10 +98,18 @@ namespace BoxBasisWF
             Console.WriteLine(@"Arduino has experienced an error");
         }
 
+        //3.Napisz funkcje Callback
+
         void OnCoil(ReceivedCommand arguments)
         {
             _GUI.Message("INFO", @"Coil state changed");
             Console.WriteLine(@"Coil state changed");
+        }
+
+        void OnMotor(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Motor state changed");
+            Console.WriteLine(@"Motor state changed");
         }
 
         private void NewLineReceived(object sender, CommandEventArgs e)
@@ -115,6 +124,7 @@ namespace BoxBasisWF
             Console.WriteLine(@"Sent > " + e.Command.CommandString());
         }
 
+        /*
         public void SetLedFrequency(double ledFrequency)
         {
             var command = new SendCommand((int)Command.SetLedFrequency, ledFrequency);
@@ -129,12 +139,21 @@ namespace BoxBasisWF
             // Send command
             _cmdMessenger.SendCommand(new SendCommand((int)Command.SetLed, ledState));
         }
+        */
+
+        //4.Napisz funkcje wysłania komendy
 
         public void SetCoilState(bool coilState)
         {
             var command = new SendCommand((int)Command.SetCoil, coilState);
             _cmdMessenger.SendCommand(new SendCommand((int)Command.SetCoil, coilState));
 
+        }
+
+        public void SetMotorState(bool motorState)
+        {
+            var command = new SendCommand((int)Command.SetMotor, motorState);
+            _cmdMessenger.SendCommand(new SendCommand((int)Command.SetMotor, motorState));
         }
 
     }
