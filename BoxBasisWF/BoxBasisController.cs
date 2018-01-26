@@ -100,8 +100,8 @@ namespace BoxBasisWF
 
         void OnCoil(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Coil state changed_wf");
-            Console.WriteLine(@"Coil state changed_wf");
+            _GUI.Message("INFO", @"Coil state changed");
+            Console.WriteLine(@"Coil state changed");
         }
 
         void OnMotor(ReceivedCommand arguments)
