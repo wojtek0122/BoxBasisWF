@@ -129,6 +129,7 @@
             this.menu_btn_start.TabIndex = 10;
             this.menu_btn_start.Text = "Start";
             this.menu_btn_start.UseVisualStyleBackColor = true;
+            this.menu_btn_start.Click += new System.EventHandler(this.menu_btn_start_Click);
             // 
             // button4
             // 
@@ -138,6 +139,7 @@
             this.button4.TabIndex = 9;
             this.button4.Text = "Open";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 

@@ -10,8 +10,6 @@ namespace BoxBasisWF
     {
         Acknowledge,            //Command to acknowledge a received command
         Error,                  //Command to messge that an error has occured
-        //SetLed,                 //Command to turn led ON or OFF
-        //SetLedFrequency,        //Command to set led blink frequency
         SetCoil,
         SetMotor,
     };
@@ -102,8 +100,8 @@ namespace BoxBasisWF
 
         void OnCoil(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Coil state changed");
-            Console.WriteLine(@"Coil state changed");
+            _GUI.Message("INFO", @"Coil state changed_wf");
+            Console.WriteLine(@"Coil state changed_wf");
         }
 
         void OnMotor(ReceivedCommand arguments)
@@ -146,14 +144,14 @@ namespace BoxBasisWF
         public void SetCoilState(bool coilState)
         {
             var command = new SendCommand((int)Command.SetCoil, coilState);
-            _cmdMessenger.SendCommand(new SendCommand((int)Command.SetCoil, coilState));
+            _cmdMessenger.SendCommand(command);
 
         }
 
         public void SetMotorState(bool motorState)
         {
             var command = new SendCommand((int)Command.SetMotor, motorState);
-            _cmdMessenger.SendCommand(new SendCommand((int)Command.SetMotor, motorState));
+            _cmdMessenger.SendCommand(command);
         }
 
     }

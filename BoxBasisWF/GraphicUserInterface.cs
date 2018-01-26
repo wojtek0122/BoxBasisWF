@@ -143,9 +143,14 @@ namespace BoxBasisWF
             options_btn_connect.Enabled = true;
         }
 
-        public void SetCoilState(bool coilState)
+        private void button4_Click(object sender, EventArgs e)
         {
-            //checkBox1.Checked = coilState;
+            _boxBasisController.SetCoilState(true);
+        }
+
+        private void menu_btn_start_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.SetMotorState(true);
         }
     }
 }
