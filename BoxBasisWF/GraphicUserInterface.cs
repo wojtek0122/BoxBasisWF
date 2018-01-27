@@ -133,10 +133,17 @@ namespace BoxBasisWF
             picBox_Connection.BackColor = Color.Red;
             Message("CONNECTION", "Disconnected!");
 
-            options_btn_disconnect.Enabled = false;
             options_btn_connect.Enabled = true;
-            tmr_connection_open.Enabled = false;
+            options_btn_disconnect.Enabled = false;
             options_btn_set.Enabled = false;
+            options_btn_refresh.Enabled = true;
+            options_btn_save.Enabled = true;
+
+            options_cb_baudrate.Enabled = true;
+            options_cb_databits.Enabled = true;
+            options_cb_parity.Enabled = true;
+            options_cb_port.Enabled = true;
+            options_cb_stopbits.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -158,18 +165,36 @@ namespace BoxBasisWF
         {
             if (_boxBasisController.IsConnected())
             {
-                picBox_Connection.BackColor = Color.Green;
-                options_btn_set.Enabled = true;
                 tmr_connection_open.Enabled = true;
+                picBox_Connection.BackColor = Color.Green;
+
+                options_btn_set.Enabled = true;
+                options_btn_save.Enabled = false;
+                options_btn_refresh.Enabled = false;
+
+                options_cb_baudrate.Enabled = false;
+                options_cb_databits.Enabled = false;
+                options_cb_parity.Enabled = false;
+                options_cb_port.Enabled = false;
+                options_cb_stopbits.Enabled = false;
             }
             else
             {
                 Message("CONNECTION", "Connection lost!");
+                tmr_connection_open.Enabled = false;
                 picBox_Connection.BackColor = Color.Red;
+
                 options_btn_connect.Enabled = true;
                 options_btn_disconnect.Enabled = false;
                 options_btn_set.Enabled = false;
-                tmr_connection_open.Enabled = false;
+                options_btn_refresh.Enabled = true;
+                options_btn_save.Enabled = true;
+
+                options_cb_baudrate.Enabled = true;
+                options_cb_databits.Enabled = true;
+                options_cb_parity.Enabled = true;
+                options_cb_port.Enabled = true;
+                options_cb_stopbits.Enabled = true;
             }
             
         }
