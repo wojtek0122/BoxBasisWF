@@ -13,6 +13,7 @@ namespace BoxBasisWF
         SetCoil,
         SetCoilTime,
         SetMotor,
+        SetMotorTime,
         SetLedOK,
         SetLedNOK,
     };
@@ -78,6 +79,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
             _cmdMessenger.Attach((int)Command.SetCoilTime, OnCoilTime);
             _cmdMessenger.Attach((int)Command.SetMotor, OnMotor);
+            _cmdMessenger.Attach((int)Command.SetMotor, OnMotorTime);
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
         }
@@ -122,6 +124,12 @@ namespace BoxBasisWF
             Console.WriteLine(@"Motor state changed");
         }
 
+        void OnMotorTime(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Motor time changed");
+            Console.WriteLine(@"Motor time changed");
+        }
+
         void OnLedOK(ReceivedCommand arguments)
         {
             _GUI.Message("INFO", @"Led OK state changed");
@@ -146,23 +154,6 @@ namespace BoxBasisWF
             Console.WriteLine(@"Sent > " + e.Command.CommandString());
         }
 
-        /*
-        public void SetLedFrequency(double ledFrequency)
-        {
-            var command = new SendCommand((int)Command.SetLedFrequency, ledFrequency);
-            _cmdMessenger.QueueCommand(new CollapseCommandStrategy(command));
-        }
-
-        public void SetLedState(bool ledState)
-        {
-            // Create command to start sending data
-            var command = new SendCommand((int)Command.SetLed, ledState);
-
-            // Send command
-            _cmdMessenger.SendCommand(new SendCommand((int)Command.SetLed, ledState));
-        }
-        */
-
         //4.Napisz funkcje wysłania komendy
 
         public void SetCoilState(bool coilState)
@@ -181,6 +172,12 @@ namespace BoxBasisWF
         public void SetMotorState(bool motorState)
         {
             var command = new SendCommand((int)Command.SetMotor, motorState);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void SetMotorTime(Int16 motorTime)
+        {
+            var command = new SendCommand((int)Command.SetMotorTime, motorTime);
             _cmdMessenger.SendCommand(command);
         }
 
