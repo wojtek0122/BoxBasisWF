@@ -89,10 +89,6 @@ namespace BoxBasisWF
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-            Int16.TryParse(options_txt_motor_time.Text, out Int16 int16time);
-            _boxBasisController.SetMotorTime(int16time);
-
             graphics = picBox_board.CreateGraphics();
             //socket
             graphics.DrawRectangle(pen, 5, 30, 125, 115);
@@ -140,6 +136,7 @@ namespace BoxBasisWF
             options_btn_disconnect.Enabled = false;
             options_btn_connect.Enabled = true;
             tmr_connection_open.Enabled = false;
+            options_btn_set.Enabled = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -149,9 +146,7 @@ namespace BoxBasisWF
 
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
-            //_boxBasisController.SetMotorState(true);
-            //_boxBasisController.SetLedOKState(true);
-            _boxBasisController.GetVoltage();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -164,6 +159,7 @@ namespace BoxBasisWF
             if (_boxBasisController.IsConnected())
             {
                 picBox_Connection.BackColor = Color.Green;
+                options_btn_set.Enabled = true;
                 tmr_connection_open.Enabled = true;
             }
             else
@@ -172,6 +168,7 @@ namespace BoxBasisWF
                 picBox_Connection.BackColor = Color.Red;
                 options_btn_connect.Enabled = true;
                 options_btn_disconnect.Enabled = false;
+                options_btn_set.Enabled = false;
                 tmr_connection_open.Enabled = false;
             }
             
@@ -180,6 +177,15 @@ namespace BoxBasisWF
         private void options_btn_refresh_Click(object sender, EventArgs e)
         {
             InitializeOptionsLists();
+        }
+
+        private void options_btn_set_Click(object sender, EventArgs e)
+        {
+            Int16 data = 0;
+            Int16.TryParse(options_txt_motor_time.Text, out data);
+            _boxBasisController.SetMotorTime(data);
+            Int16.TryParse(options_txt_motor_time.Text, out data);
+            _boxBasisController.SetMotorTime(data);
         }
     }
 }
