@@ -184,8 +184,8 @@ namespace BoxBasisWF
             Int16 data = 0;
             Int16.TryParse(options_txt_motor_time.Text, out data);
             _boxBasisController.SetMotorTime(data);
-            Int16.TryParse(options_txt_motor_time.Text, out data);
-            _boxBasisController.SetMotorTime(data);
+            Int16.TryParse(options_txt_coil_time.Text, out data);
+            _boxBasisController.SetCoilTime(data);
         }
     }
 }
