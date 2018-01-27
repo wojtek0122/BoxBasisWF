@@ -40,10 +40,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.options_txt_coil = new System.Windows.Forms.TextBox();
+            this.options_txt_coil_time = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.options_txt_motor = new System.Windows.Forms.TextBox();
+            this.options_txt_motor_time = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.options_cb_port = new System.Windows.Forms.ComboBox();
             this.options_cb_baudrate = new System.Windows.Forms.ComboBox();
@@ -170,10 +170,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.options_txt_coil);
+            this.groupBox2.Controls.Add(this.options_txt_coil_time);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.options_txt_motor);
+            this.groupBox2.Controls.Add(this.options_txt_motor_time);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.options_cb_port);
             this.groupBox2.Controls.Add(this.options_cb_baudrate);
@@ -209,13 +209,13 @@
             this.label14.TabIndex = 28;
             this.label14.Text = "[ms]";
             // 
-            // options_txt_coil
+            // options_txt_coil_time
             // 
-            this.options_txt_coil.Location = new System.Drawing.Point(193, 79);
-            this.options_txt_coil.Name = "options_txt_coil";
-            this.options_txt_coil.Size = new System.Drawing.Size(55, 20);
-            this.options_txt_coil.TabIndex = 27;
-            this.options_txt_coil.Text = "50";
+            this.options_txt_coil_time.Location = new System.Drawing.Point(193, 79);
+            this.options_txt_coil_time.Name = "options_txt_coil_time";
+            this.options_txt_coil_time.Size = new System.Drawing.Size(55, 20);
+            this.options_txt_coil_time.TabIndex = 27;
+            this.options_txt_coil_time.Text = "50";
             // 
             // label15
             // 
@@ -235,13 +235,13 @@
             this.label12.TabIndex = 25;
             this.label12.Text = "[ms]";
             // 
-            // options_txt_motor
+            // options_txt_motor_time
             // 
-            this.options_txt_motor.Location = new System.Drawing.Point(193, 58);
-            this.options_txt_motor.Name = "options_txt_motor";
-            this.options_txt_motor.Size = new System.Drawing.Size(55, 20);
-            this.options_txt_motor.TabIndex = 24;
-            this.options_txt_motor.Text = "250";
+            this.options_txt_motor_time.Location = new System.Drawing.Point(193, 58);
+            this.options_txt_motor_time.Name = "options_txt_motor_time";
+            this.options_txt_motor_time.Size = new System.Drawing.Size(55, 20);
+            this.options_txt_motor_time.TabIndex = 24;
+            this.options_txt_motor_time.Text = "250";
             // 
             // label13
             // 
@@ -564,10 +564,10 @@
         private System.Windows.Forms.ComboBox options_cb_stopbits;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox options_txt_coil;
+        private System.Windows.Forms.TextBox options_txt_coil_time;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox options_txt_motor;
+        private System.Windows.Forms.TextBox options_txt_motor_time;
         private System.Windows.Forms.Label label13;
     }
 }

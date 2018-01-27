@@ -11,6 +11,7 @@ namespace BoxBasisWF
         Acknowledge,            //Command to acknowledge a received command
         Error,                  //Command to messge that an error has occured
         SetCoil,
+        SetCoilTime,
         SetMotor,
         SetLedOK,
         SetLedNOK,
@@ -75,6 +76,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.Acknowledge, OnAcknowledge);
             _cmdMessenger.Attach((int)Command.Error, OnError);
             _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
+            _cmdMessenger.Attach((int)Command.SetCoilTime, OnCoilTime);
             _cmdMessenger.Attach((int)Command.SetMotor, OnMotor);
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
@@ -106,6 +108,12 @@ namespace BoxBasisWF
         {
             _GUI.Message("INFO", @"Coil state changed");
             Console.WriteLine(@"Coil state changed");
+        }
+
+        void OnCoilTime(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Coil time changed");
+            Console.WriteLine(@"Coil time changed");
         }
 
         void OnMotor(ReceivedCommand arguments)
@@ -162,6 +170,12 @@ namespace BoxBasisWF
             var command = new SendCommand((int)Command.SetCoil, coilState);
             _cmdMessenger.SendCommand(command);
 
+        }
+
+        public void SetCoilTime(Int16 coilTime)
+        {
+            var command = new SendCommand((int)Command.SetCoilTime, coilTime);
+            _cmdMessenger.SendCommand(command);
         }
 
         public void SetMotorState(bool motorState)
