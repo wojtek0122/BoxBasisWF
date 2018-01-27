@@ -153,7 +153,7 @@ namespace BoxBasisWF
 
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
-            _boxBasisController.Buzzer(false, false);
+            _boxBasisController.GetSwitchBox();
         }
 
         private void button2_Click(object sender, EventArgs e)

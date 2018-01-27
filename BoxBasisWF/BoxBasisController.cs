@@ -8,8 +8,8 @@ namespace BoxBasisWF
     //1. Dodaj komende do enum
     enum Command
     {
-        Acknowledge,            //Command to acknowledge a received command
-        Error,                  //Command to messge that an error has occured
+        Acknowledge,            
+        Error,                  
         SetCoil,
         SetCoilTime,
         SetMotor,
@@ -17,6 +17,8 @@ namespace BoxBasisWF
         SetLedOK,
         SetLedNOK,
         GetVoltage,
+        GetSwitchBox,
+        GetSwitchTester,
         Buzzer,
     };
 
@@ -85,6 +87,8 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
             _cmdMessenger.Attach((int)Command.GetVoltage, OnVoltage);
+            _cmdMessenger.Attach((int)Command.GetSwitchBox, OnSwitchBox);
+            _cmdMessenger.Attach((int)Command.GetSwitchTester, OnSwitchTester);
             _cmdMessenger.Attach((int)Command.Buzzer, OnBuzzer);
         }
 
@@ -152,6 +156,18 @@ namespace BoxBasisWF
             Console.WriteLine(@"Read voltage");
         }
 
+        void OnSwitchBox(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Switch box state");
+            Console.WriteLine(@"Switch box state");
+        }
+
+        void OnSwitchTester(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Switch tester state");
+            Console.WriteLine(@"Switch tester state");
+        }
+
         void OnBuzzer(ReceivedCommand arguments)
         {
             _GUI.Message("INFO", @"Buzzer");
@@ -211,6 +227,18 @@ namespace BoxBasisWF
         public void GetVoltage()
         {
             var command = new SendCommand((int)Command.GetVoltage);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void GetSwitchBox()
+        {
+            var command = new SendCommand((int)Command.GetSwitchBox);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void GetSwitchTester()
+        {
+            var command = new SendCommand((int)Command.GetSwitchTester);
             _cmdMessenger.SendCommand(command);
         }
 
