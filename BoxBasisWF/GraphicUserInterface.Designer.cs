@@ -39,6 +39,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.options_txt_coil = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.options_txt_motor = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.options_cb_port = new System.Windows.Forms.ComboBox();
             this.options_cb_baudrate = new System.Windows.Forms.ComboBox();
             this.options_cb_databits = new System.Windows.Forms.ComboBox();
@@ -123,17 +129,17 @@
             // 
             // menu_btn_start
             // 
-            this.menu_btn_start.Location = new System.Drawing.Point(100, 152);
+            this.menu_btn_start.Location = new System.Drawing.Point(100, 177);
             this.menu_btn_start.Name = "menu_btn_start";
             this.menu_btn_start.Size = new System.Drawing.Size(75, 23);
             this.menu_btn_start.TabIndex = 10;
-            this.menu_btn_start.Text = "Start";
+            this.menu_btn_start.Text = "-Start";
             this.menu_btn_start.UseVisualStyleBackColor = true;
             this.menu_btn_start.Click += new System.EventHandler(this.menu_btn_start_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(14, 152);
+            this.button4.Location = new System.Drawing.Point(14, 177);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 9;
@@ -143,25 +149,32 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(100, 74);
+            this.button3.Location = new System.Drawing.Point(194, 35);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
-            this.button3.Text = "Save";
+            this.button3.Text = "-Save";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(186, 152);
+            this.button2.Location = new System.Drawing.Point(186, 177);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 7;
-            this.button2.Text = "Stop";
+            this.button2.Text = "-Stop";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.options_txt_coil);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.options_txt_motor);
+            this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.options_cb_port);
             this.groupBox2.Controls.Add(this.options_cb_baudrate);
             this.groupBox2.Controls.Add(this.options_cb_databits);
@@ -187,12 +200,64 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Options";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(248, 81);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(26, 13);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "[ms]";
+            // 
+            // options_txt_coil
+            // 
+            this.options_txt_coil.Location = new System.Drawing.Point(193, 79);
+            this.options_txt_coil.Name = "options_txt_coil";
+            this.options_txt_coil.Size = new System.Drawing.Size(55, 20);
+            this.options_txt_coil.TabIndex = 27;
+            this.options_txt_coil.Text = "50";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(127, 82);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 13);
+            this.label15.TabIndex = 26;
+            this.label15.Text = "Coil time:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(248, 60);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(26, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "[ms]";
+            // 
+            // options_txt_motor
+            // 
+            this.options_txt_motor.Location = new System.Drawing.Point(193, 58);
+            this.options_txt_motor.Name = "options_txt_motor";
+            this.options_txt_motor.Size = new System.Drawing.Size(55, 20);
+            this.options_txt_motor.TabIndex = 24;
+            this.options_txt_motor.Text = "250";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(127, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 13);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Motor time:";
+            // 
             // options_cb_port
             // 
             this.options_cb_port.FormattingEnabled = true;
-            this.options_cb_port.Location = new System.Drawing.Point(62, 11);
+            this.options_cb_port.Location = new System.Drawing.Point(59, 11);
             this.options_cb_port.Name = "options_cb_port";
-            this.options_cb_port.Size = new System.Drawing.Size(69, 21);
+            this.options_cb_port.Size = new System.Drawing.Size(65, 21);
             this.options_cb_port.TabIndex = 22;
             // 
             // options_cb_baudrate
@@ -210,11 +275,11 @@
             "76800",
             "115200",
             "230400"});
-            this.options_cb_baudrate.Location = new System.Drawing.Point(62, 34);
+            this.options_cb_baudrate.Location = new System.Drawing.Point(59, 34);
             this.options_cb_baudrate.Name = "options_cb_baudrate";
-            this.options_cb_baudrate.Size = new System.Drawing.Size(69, 21);
+            this.options_cb_baudrate.Size = new System.Drawing.Size(65, 21);
             this.options_cb_baudrate.TabIndex = 21;
-            this.options_cb_baudrate.Text = "9600";
+            this.options_cb_baudrate.Text = "115200";
             // 
             // options_cb_databits
             // 
@@ -225,26 +290,26 @@
             "7",
             "8",
             "9"});
-            this.options_cb_databits.Location = new System.Drawing.Point(62, 57);
+            this.options_cb_databits.Location = new System.Drawing.Point(59, 57);
             this.options_cb_databits.Name = "options_cb_databits";
-            this.options_cb_databits.Size = new System.Drawing.Size(69, 21);
+            this.options_cb_databits.Size = new System.Drawing.Size(65, 21);
             this.options_cb_databits.TabIndex = 20;
             this.options_cb_databits.Text = "8";
             // 
             // options_cb_parity
             // 
             this.options_cb_parity.FormattingEnabled = true;
-            this.options_cb_parity.Location = new System.Drawing.Point(62, 80);
+            this.options_cb_parity.Location = new System.Drawing.Point(59, 80);
             this.options_cb_parity.Name = "options_cb_parity";
-            this.options_cb_parity.Size = new System.Drawing.Size(69, 21);
+            this.options_cb_parity.Size = new System.Drawing.Size(65, 21);
             this.options_cb_parity.TabIndex = 19;
             // 
             // options_cb_stopbits
             // 
             this.options_cb_stopbits.FormattingEnabled = true;
-            this.options_cb_stopbits.Location = new System.Drawing.Point(62, 103);
+            this.options_cb_stopbits.Location = new System.Drawing.Point(59, 103);
             this.options_cb_stopbits.Name = "options_cb_stopbits";
-            this.options_cb_stopbits.Size = new System.Drawing.Size(69, 21);
+            this.options_cb_stopbits.Size = new System.Drawing.Size(65, 21);
             this.options_cb_stopbits.TabIndex = 18;
             // 
             // label11
@@ -316,11 +381,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(137, 40);
+            this.label7.Location = new System.Drawing.Point(127, 40);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Delays:";
+            this.label7.Text = "CMD Delay:";
             // 
             // options_txt_tests
             // 
@@ -333,7 +398,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(137, 19);
+            this.label6.Location = new System.Drawing.Point(127, 19);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 5;
@@ -498,6 +563,12 @@
         private System.Windows.Forms.ComboBox options_cb_parity;
         private System.Windows.Forms.ComboBox options_cb_stopbits;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox options_txt_coil;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox options_txt_motor;
+        private System.Windows.Forms.Label label13;
     }
 }
 

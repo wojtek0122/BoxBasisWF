@@ -12,6 +12,8 @@ namespace BoxBasisWF
         Error,                  //Command to messge that an error has occured
         SetCoil,
         SetMotor,
+        SetLedOK,
+        SetLedNOK,
     };
 
     public class BoxBasisController
@@ -74,6 +76,8 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.Error, OnError);
             _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
             _cmdMessenger.Attach((int)Command.SetMotor, OnMotor);
+            _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
+            _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
         }
 
         // ----------------------- CALLBACKS -----------------------
@@ -108,6 +112,18 @@ namespace BoxBasisWF
         {
             _GUI.Message("INFO", @"Motor state changed");
             Console.WriteLine(@"Motor state changed");
+        }
+
+        void OnLedOK(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Led OK state changed");
+            Console.WriteLine(@"Led OK state changed");
+        }
+
+        void OnLedNOK(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Led NOK state changed");
+            Console.WriteLine(@"Led NOK state changed");
         }
 
         private void NewLineReceived(object sender, CommandEventArgs e)
@@ -154,5 +170,16 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
+        public void SetLedOKState(bool ledOKState)
+        {
+            var command = new SendCommand((int)Command.SetLedOK, ledOKState);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void SetLedNOKState(bool ledNOKState)
+        {
+            var command = new SendCommand((int)Command.SetLedNOK, ledNOKState);
+            _cmdMessenger.SendCommand(command);
+        }
     }
 }
