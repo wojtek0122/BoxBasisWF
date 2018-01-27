@@ -17,6 +17,7 @@ namespace BoxBasisWF
         SetLedOK,
         SetLedNOK,
         GetVoltage,
+        Buzzer,
     };
 
     public class BoxBasisController
@@ -84,6 +85,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
             _cmdMessenger.Attach((int)Command.GetVoltage, OnVoltage);
+            _cmdMessenger.Attach((int)Command.Buzzer, OnBuzzer);
         }
 
         // ----------------------- CALLBACKS -----------------------
@@ -150,6 +152,12 @@ namespace BoxBasisWF
             Console.WriteLine(@"Read voltage");
         }
 
+        void OnBuzzer(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Buzzer");
+            Console.WriteLine(@"Buzzer");
+        }
+
         private void NewLineReceived(object sender, CommandEventArgs e)
         {
             _GUI.Message("RECEIVED", e.Command.CommandString());
@@ -203,6 +211,14 @@ namespace BoxBasisWF
         public void GetVoltage()
         {
             var command = new SendCommand((int)Command.GetVoltage);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void Buzzer(bool buzzerState, bool buzzerOK)
+        {
+            var command = new SendCommand((int)Command.Buzzer);
+            command.AddArgument(buzzerState);
+            command.AddArgument(buzzerOK);
             _cmdMessenger.SendCommand(command);
         }
     }
