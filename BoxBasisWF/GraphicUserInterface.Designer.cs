@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -70,6 +71,8 @@
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.label3 = new System.Windows.Forms.Label();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
+            this.tmr_connection_open = new System.Windows.Forms.Timer(this.components);
+            this.options_btn_refresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -169,6 +172,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.options_btn_refresh);
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.options_txt_coil_time);
             this.groupBox2.Controls.Add(this.label15);
@@ -342,9 +346,9 @@
             // options_btn_disconnect
             // 
             this.options_btn_disconnect.Enabled = false;
-            this.options_btn_disconnect.Location = new System.Drawing.Point(103, 126);
+            this.options_btn_disconnect.Location = new System.Drawing.Point(74, 126);
             this.options_btn_disconnect.Name = "options_btn_disconnect";
-            this.options_btn_disconnect.Size = new System.Drawing.Size(75, 23);
+            this.options_btn_disconnect.Size = new System.Drawing.Size(63, 23);
             this.options_btn_disconnect.TabIndex = 11;
             this.options_btn_disconnect.Text = "Disonnect";
             this.options_btn_disconnect.UseVisualStyleBackColor = true;
@@ -353,9 +357,9 @@
             // options_btn_connect
             // 
             this.options_btn_connect.Enabled = false;
-            this.options_btn_connect.Location = new System.Drawing.Point(22, 126);
+            this.options_btn_connect.Location = new System.Drawing.Point(7, 126);
             this.options_btn_connect.Name = "options_btn_connect";
-            this.options_btn_connect.Size = new System.Drawing.Size(75, 23);
+            this.options_btn_connect.Size = new System.Drawing.Size(63, 23);
             this.options_btn_connect.TabIndex = 10;
             this.options_btn_connect.Text = "Connect";
             this.options_btn_connect.UseVisualStyleBackColor = true;
@@ -406,9 +410,9 @@
             // 
             // options_btn_save
             // 
-            this.options_btn_save.Location = new System.Drawing.Point(184, 126);
+            this.options_btn_save.Location = new System.Drawing.Point(141, 126);
             this.options_btn_save.Name = "options_btn_save";
-            this.options_btn_save.Size = new System.Drawing.Size(75, 23);
+            this.options_btn_save.Size = new System.Drawing.Size(63, 23);
             this.options_btn_save.TabIndex = 12;
             this.options_btn_save.Text = "Save";
             this.options_btn_save.Click += new System.EventHandler(this.options_btn_save_Click);
@@ -496,6 +500,21 @@
             this.picBox_Connection.TabIndex = 6;
             this.picBox_Connection.TabStop = false;
             // 
+            // tmr_connection_open
+            // 
+            this.tmr_connection_open.Interval = 500;
+            this.tmr_connection_open.Tick += new System.EventHandler(this.tmr_connection_open_Tick);
+            // 
+            // options_btn_refresh
+            // 
+            this.options_btn_refresh.Location = new System.Drawing.Point(209, 126);
+            this.options_btn_refresh.Name = "options_btn_refresh";
+            this.options_btn_refresh.Size = new System.Drawing.Size(63, 23);
+            this.options_btn_refresh.TabIndex = 29;
+            this.options_btn_refresh.Text = "Refresh";
+            this.options_btn_refresh.UseVisualStyleBackColor = true;
+            this.options_btn_refresh.Click += new System.EventHandler(this.options_btn_refresh_Click);
+            // 
             // GraphicUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -569,6 +588,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox options_txt_motor_time;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Timer tmr_connection_open;
+        private System.Windows.Forms.Button options_btn_refresh;
     }
 }
 

@@ -29,9 +29,9 @@ namespace BoxBasisWF
 
         private void InitializeOptionsLists()
         {
-            options_cb_port.Items.Clear();
             options_cb_parity.Items.Clear();
             options_cb_stopbits.Items.Clear();
+            options_cb_port.Items.Clear();
             foreach (String s in System.IO.Ports.SerialPort.GetPortNames()) options_cb_port.Items.Add(s);
             try
             {
@@ -39,7 +39,7 @@ namespace BoxBasisWF
             }
             catch (ArgumentOutOfRangeException)
             {
-                Message("ERROR", "Nie znaleziono żadnych portów COM!");
+                Message("ERROR", "COM not recognized!");
             }
             
             foreach (String s in Enum.GetNames(typeof(System.IO.Ports.Parity))) options_cb_parity.Items.Add(s);
@@ -108,19 +108,6 @@ namespace BoxBasisWF
             graphics.DrawRectangle(pen, 435, 105, 80, 50);
         }
 
-        private void options_btn_connect_Click(object sender, EventArgs e)
-        {
-            _boxBasisController.Setup(this, _connectionData);
-            
-            if(_boxBasisController.IsConnected())
-            {
-                picBox_Connection.BackColor = Color.Green;
-            }
-
-            options_btn_disconnect.Enabled = true;
-            options_btn_connect.Enabled = false;
-        }
-
         private void options_btn_save_Click(object sender, EventArgs e)
         {
             _connectionData.PortName = options_cb_port.Text.ToString();
@@ -135,16 +122,24 @@ namespace BoxBasisWF
             options_btn_connect.Enabled = true;
         }
 
+        private void options_btn_connect_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.Setup(this, _connectionData);
+
+            options_btn_disconnect.Enabled = true;
+            options_btn_connect.Enabled = false;
+            tmr_connection_open.Enabled = true;
+        }
+
         private void options_btn_disconnect_Click(object sender, EventArgs e)
         {
             _boxBasisController.Exit();
-            if (!_boxBasisController.IsConnected())
-            {
-                picBox_Connection.BackColor = Color.Red;
-            }
+            picBox_Connection.BackColor = Color.Red;
+            Message("CONNECTION", "Disconnected!");
 
             options_btn_disconnect.Enabled = false;
             options_btn_connect.Enabled = true;
+            tmr_connection_open.Enabled = false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -162,6 +157,29 @@ namespace BoxBasisWF
         private void button2_Click(object sender, EventArgs e)
         {
             _boxBasisController.SetLedNOKState(true);
+        }
+
+        private void tmr_connection_open_Tick(object sender, EventArgs e)
+        {
+            if (_boxBasisController.IsConnected())
+            {
+                picBox_Connection.BackColor = Color.Green;
+                tmr_connection_open.Enabled = true;
+            }
+            else
+            {
+                Message("CONNECTION", "Connection lost!");
+                picBox_Connection.BackColor = Color.Red;
+                options_btn_connect.Enabled = true;
+                options_btn_disconnect.Enabled = false;
+                tmr_connection_open.Enabled = false;
+            }
+            
+        }
+
+        private void options_btn_refresh_Click(object sender, EventArgs e)
+        {
+            InitializeOptionsLists();
         }
     }
 }
