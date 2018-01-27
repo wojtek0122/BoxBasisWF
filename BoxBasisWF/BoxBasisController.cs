@@ -79,7 +79,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetCoil, OnCoil);
             _cmdMessenger.Attach((int)Command.SetCoilTime, OnCoilTime);
             _cmdMessenger.Attach((int)Command.SetMotor, OnMotor);
-            _cmdMessenger.Attach((int)Command.SetMotor, OnMotorTime);
+            _cmdMessenger.Attach((int)Command.SetMotorTime, OnMotorTime);
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
         }
@@ -160,7 +160,6 @@ namespace BoxBasisWF
         {
             var command = new SendCommand((int)Command.SetCoil, coilState);
             _cmdMessenger.SendCommand(command);
-
         }
 
         public void SetCoilTime(Int16 coilTime)
