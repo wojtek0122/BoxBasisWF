@@ -16,6 +16,7 @@ namespace BoxBasisWF
         SetMotorTime,
         SetLedOK,
         SetLedNOK,
+        GetVoltage,
     };
 
     public class BoxBasisController
@@ -82,6 +83,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetMotorTime, OnMotorTime);
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
+            _cmdMessenger.Attach((int)Command.GetVoltage, OnVoltage);
         }
 
         // ----------------------- CALLBACKS -----------------------
@@ -142,6 +144,12 @@ namespace BoxBasisWF
             Console.WriteLine(@"Led NOK state changed");
         }
 
+        void OnVoltage(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Read voltage");
+            Console.WriteLine(@"Read voltage");
+        }
+
         private void NewLineReceived(object sender, CommandEventArgs e)
         {
             _GUI.Message("RECEIVED", e.Command.CommandString());
@@ -189,6 +197,12 @@ namespace BoxBasisWF
         public void SetLedNOKState(bool ledNOKState)
         {
             var command = new SendCommand((int)Command.SetLedNOK, ledNOKState);
+            _cmdMessenger.SendCommand(command);
+        }
+
+        public void GetVoltage()
+        {
+            var command = new SendCommand((int)Command.GetVoltage);
             _cmdMessenger.SendCommand(command);
         }
     }

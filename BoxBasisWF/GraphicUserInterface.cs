@@ -155,7 +155,8 @@ namespace BoxBasisWF
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
             //_boxBasisController.SetMotorState(true);
-            _boxBasisController.SetLedOKState(true);
+            //_boxBasisController.SetLedOKState(true);
+            _boxBasisController.GetVoltage();
         }
 
         private void button2_Click(object sender, EventArgs e)
