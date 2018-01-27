@@ -89,10 +89,8 @@ namespace BoxBasisWF
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Int16.TryParse(options_txt_coil_time.Text, out Int16 int16time);
-            _boxBasisController.SetCoilTime(int16time);
 
-            Int16.TryParse(options_txt_motor_time.Text, out int16time);
+            Int16.TryParse(options_txt_motor_time.Text, out Int16 int16time);
             _boxBasisController.SetMotorTime(int16time);
 
             graphics = picBox_board.CreateGraphics();
