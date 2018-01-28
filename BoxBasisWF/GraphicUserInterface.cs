@@ -87,23 +87,6 @@ namespace BoxBasisWF
             console_txt_log.ScrollToCaret();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            graphics = picBox_board.CreateGraphics();
-            //socket
-            graphics.DrawRectangle(pen, 5, 30, 125, 115);
-            //mjd
-            graphics.DrawRectangle(pen, 145, 75, 70, 55);
-            //capacitors
-            graphics.DrawRectangle(pen, 200, 10, 240, 180);
-            //ferrocore
-            graphics.DrawRectangle(pen, 445, 35, 60, 60);
-            //stabilizer
-            graphics.DrawRectangle(pen, 510, 25, 45, 45);
-            //k2231
-            graphics.DrawRectangle(pen, 435, 105, 80, 50);
-        }
-
         private void options_btn_save_Click(object sender, EventArgs e)
         {
             _connectionData.PortName = options_cb_port.Text.ToString();
@@ -133,6 +116,9 @@ namespace BoxBasisWF
             picBox_Connection.BackColor = Color.Red;
             Message("CONNECTION", "Disconnected!");
 
+            menu_btn_open.Enabled = false;
+            menu_btn_start.Enabled = false;
+
             options_btn_connect.Enabled = true;
             options_btn_disconnect.Enabled = false;
             options_btn_set.Enabled = false;
@@ -146,19 +132,14 @@ namespace BoxBasisWF
             options_cb_stopbits.Enabled = true;
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            _boxBasisController.SetCoilState(true);
-        }
-
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
-            _boxBasisController.GetSwitchBox();
-        }
+            menu_btn_stop.Enabled = true;
+            menu_btn_start.Enabled = false;
+            menu_btn_open.Enabled = false;
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            _boxBasisController.SetLedNOKState(true);
+            //testy
+
         }
 
         private void tmr_connection_open_Tick(object sender, EventArgs e)
@@ -167,6 +148,9 @@ namespace BoxBasisWF
             {
                 tmr_connection_open.Enabled = true;
                 picBox_Connection.BackColor = Color.Green;
+
+                menu_btn_open.Enabled = true;
+                menu_btn_start.Enabled = true;
 
                 options_btn_set.Enabled = true;
                 options_btn_save.Enabled = false;
@@ -183,6 +167,9 @@ namespace BoxBasisWF
                 Message("CONNECTION", "Connection lost!");
                 tmr_connection_open.Enabled = false;
                 picBox_Connection.BackColor = Color.Red;
+
+                menu_btn_open.Enabled = false;
+                menu_btn_start.Enabled = false;
 
                 options_btn_connect.Enabled = true;
                 options_btn_disconnect.Enabled = false;
@@ -211,6 +198,21 @@ namespace BoxBasisWF
             _boxBasisController.SetMotorTime(data);
             Int16.TryParse(options_txt_coil_time.Text, out data);
             _boxBasisController.SetCoilTime(data);
+        }
+
+        private void menu_btn_open_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.SetCoilState(true);
+        }
+
+        private void menu_btn_save_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_btn_stop_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

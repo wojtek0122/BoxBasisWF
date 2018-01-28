@@ -31,15 +31,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.menu_txt_serial = new System.Windows.Forms.TextBox();
+            this.menu_txt_batch = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.menu_btn_start = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.menu_btn_open = new System.Windows.Forms.Button();
+            this.menu_btn_stop = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.options_btn_set = new System.Windows.Forms.Button();
+            this.options_btn_refresh = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.options_txt_coil_time = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -72,8 +73,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
             this.tmr_connection_open = new System.Windows.Forms.Timer(this.components);
-            this.options_btn_refresh = new System.Windows.Forms.Button();
-            this.options_btn_set = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -84,14 +83,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox7);
-            this.groupBox1.Controls.Add(this.textBox6);
+            this.groupBox1.Controls.Add(this.menu_txt_serial);
+            this.groupBox1.Controls.Add(this.menu_txt_batch);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.menu_btn_start);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.menu_btn_open);
+            this.groupBox1.Controls.Add(this.menu_btn_stop);
             this.groupBox1.Location = new System.Drawing.Point(647, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(280, 206);
@@ -99,19 +97,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Menu";
             // 
-            // textBox7
+            // menu_txt_serial
             // 
-            this.textBox7.Location = new System.Drawing.Point(55, 48);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(134, 20);
-            this.textBox7.TabIndex = 14;
+            this.menu_txt_serial.Location = new System.Drawing.Point(55, 48);
+            this.menu_txt_serial.Name = "menu_txt_serial";
+            this.menu_txt_serial.Size = new System.Drawing.Size(134, 20);
+            this.menu_txt_serial.TabIndex = 14;
             // 
-            // textBox6
+            // menu_txt_batch
             // 
-            this.textBox6.Location = new System.Drawing.Point(55, 24);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(134, 20);
-            this.textBox6.TabIndex = 13;
+            this.menu_txt_batch.Location = new System.Drawing.Point(55, 24);
+            this.menu_txt_batch.Name = "menu_txt_batch";
+            this.menu_txt_batch.Size = new System.Drawing.Size(134, 20);
+            this.menu_txt_batch.TabIndex = 13;
             // 
             // label5
             // 
@@ -133,6 +131,7 @@
             // 
             // menu_btn_start
             // 
+            this.menu_btn_start.Enabled = false;
             this.menu_btn_start.Location = new System.Drawing.Point(100, 177);
             this.menu_btn_start.Name = "menu_btn_start";
             this.menu_btn_start.Size = new System.Drawing.Size(75, 23);
@@ -141,35 +140,27 @@
             this.menu_btn_start.UseVisualStyleBackColor = true;
             this.menu_btn_start.Click += new System.EventHandler(this.menu_btn_start_Click);
             // 
-            // button4
+            // menu_btn_open
             // 
-            this.button4.Location = new System.Drawing.Point(14, 177);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Open";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.menu_btn_open.Enabled = false;
+            this.menu_btn_open.Location = new System.Drawing.Point(14, 177);
+            this.menu_btn_open.Name = "menu_btn_open";
+            this.menu_btn_open.Size = new System.Drawing.Size(75, 23);
+            this.menu_btn_open.TabIndex = 9;
+            this.menu_btn_open.Text = "Open";
+            this.menu_btn_open.UseVisualStyleBackColor = true;
+            this.menu_btn_open.Click += new System.EventHandler(this.menu_btn_open_Click);
             // 
-            // button3
+            // menu_btn_stop
             // 
-            this.button3.Location = new System.Drawing.Point(194, 35);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "-Save";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(186, 177);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "-Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.menu_btn_stop.Enabled = false;
+            this.menu_btn_stop.Location = new System.Drawing.Point(186, 177);
+            this.menu_btn_stop.Name = "menu_btn_stop";
+            this.menu_btn_stop.Size = new System.Drawing.Size(75, 23);
+            this.menu_btn_stop.TabIndex = 7;
+            this.menu_btn_stop.Text = "-Stop";
+            this.menu_btn_stop.UseVisualStyleBackColor = true;
+            this.menu_btn_stop.Click += new System.EventHandler(this.menu_btn_stop_Click);
             // 
             // groupBox2
             // 
@@ -205,6 +196,26 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Options";
+            // 
+            // options_btn_set
+            // 
+            this.options_btn_set.Enabled = false;
+            this.options_btn_set.Location = new System.Drawing.Point(156, 101);
+            this.options_btn_set.Name = "options_btn_set";
+            this.options_btn_set.Size = new System.Drawing.Size(63, 23);
+            this.options_btn_set.TabIndex = 30;
+            this.options_btn_set.Text = "Set";
+            this.options_btn_set.Click += new System.EventHandler(this.options_btn_set_Click);
+            // 
+            // options_btn_refresh
+            // 
+            this.options_btn_refresh.Location = new System.Drawing.Point(210, 136);
+            this.options_btn_refresh.Name = "options_btn_refresh";
+            this.options_btn_refresh.Size = new System.Drawing.Size(63, 23);
+            this.options_btn_refresh.TabIndex = 29;
+            this.options_btn_refresh.Text = "Refresh";
+            this.options_btn_refresh.UseVisualStyleBackColor = true;
+            this.options_btn_refresh.Click += new System.EventHandler(this.options_btn_refresh_Click);
             // 
             // label14
             // 
@@ -507,26 +518,6 @@
             this.tmr_connection_open.Interval = 500;
             this.tmr_connection_open.Tick += new System.EventHandler(this.tmr_connection_open_Tick);
             // 
-            // options_btn_refresh
-            // 
-            this.options_btn_refresh.Location = new System.Drawing.Point(210, 136);
-            this.options_btn_refresh.Name = "options_btn_refresh";
-            this.options_btn_refresh.Size = new System.Drawing.Size(63, 23);
-            this.options_btn_refresh.TabIndex = 29;
-            this.options_btn_refresh.Text = "Refresh";
-            this.options_btn_refresh.UseVisualStyleBackColor = true;
-            this.options_btn_refresh.Click += new System.EventHandler(this.options_btn_refresh_Click);
-            // 
-            // options_btn_set
-            // 
-            this.options_btn_set.Enabled = false;
-            this.options_btn_set.Location = new System.Drawing.Point(156, 101);
-            this.options_btn_set.Name = "options_btn_set";
-            this.options_btn_set.Size = new System.Drawing.Size(63, 23);
-            this.options_btn_set.TabIndex = 30;
-            this.options_btn_set.Text = "Set";
-            this.options_btn_set.Click += new System.EventHandler(this.options_btn_set_Click);
-            // 
             // GraphicUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,9 +562,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox picBox_Connection;
         private System.Windows.Forms.Button menu_btn_start;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button menu_btn_open;
+        private System.Windows.Forms.Button menu_btn_stop;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox options_txt_tests;
@@ -581,8 +571,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox options_txt_delays;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox menu_txt_serial;
+        private System.Windows.Forms.TextBox menu_txt_batch;
         private System.Windows.Forms.Button options_btn_disconnect;
         private System.Windows.Forms.Button options_btn_connect;
         private System.Windows.Forms.RichTextBox console_txt_log;

@@ -69,9 +69,12 @@ namespace BoxBasisWF
 
         public void Exit()
         {
-            _cmdMessenger.Disconnect();
-            _cmdMessenger.Dispose();
-            _serialTransport.Dispose();
+            if(_serialTransport != null)
+            {
+                _cmdMessenger.Disconnect();
+                _cmdMessenger.Dispose();
+                _serialTransport.Dispose();
+            }
         }
 
         //2. Przypisz callback do metody
