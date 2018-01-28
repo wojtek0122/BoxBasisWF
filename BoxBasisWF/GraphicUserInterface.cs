@@ -133,9 +133,12 @@ namespace BoxBasisWF
                     !String.IsNullOrEmpty(menu_txt_serial.Text) && 
                     !String.IsNullOrWhiteSpace(menu_txt_serial.Text))
             {
-                menu_btn_stop.Enabled = true;
                 menu_btn_start.Enabled = false;
                 menu_btn_open.Enabled = false;
+
+                int.TryParse(options_txt_tests.Text, out int intdata);
+                _boxBasisController.SetTestQuantity(intdata);
+                _boxBasisController.GoTest();
             }
             else
             {
@@ -206,14 +209,5 @@ namespace BoxBasisWF
             _boxBasisController.SetCoilState(true);
         }
 
-        private void menu_btn_save_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menu_btn_stop_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

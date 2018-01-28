@@ -30,6 +30,7 @@ namespace BoxBasisWF
         private CmdMessenger            _cmdMessenger;
         private GraphicUserInterface    _GUI;
         private ConnectionData          _connectionData;
+        private int                     testQuantity;
 
         // ----------------------- MAIN -----------------------
 
@@ -251,6 +252,24 @@ namespace BoxBasisWF
             command.AddArgument(buzzerState);
             command.AddArgument(buzzerOK);
             _cmdMessenger.SendCommand(command);
+        }
+
+        public void SetTestQuantity(int quantity)
+        {
+            testQuantity = quantity;
+        }
+
+        public void GoTest()
+        {
+            int i = 0;
+
+            while (i < testQuantity)
+            {
+
+                i++;
+                Console.WriteLine(i);
+            }
+
         }
     }
 }
