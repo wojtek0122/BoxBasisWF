@@ -411,7 +411,7 @@
             this.options_txt_delays.Name = "options_txt_delays";
             this.options_txt_delays.Size = new System.Drawing.Size(55, 20);
             this.options_txt_delays.TabIndex = 8;
-            this.options_txt_delays.Text = "1000";
+            this.options_txt_delays.Text = "300";
             // 
             // label7
             // 

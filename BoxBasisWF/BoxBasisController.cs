@@ -31,6 +31,7 @@ namespace BoxBasisWF
         private GraphicUserInterface    _GUI;
         private ConnectionData          _connectionData;
         private int                     testQuantity;
+        private int                     testDelay;
 
         // ----------------------- MAIN -----------------------
 
@@ -254,9 +255,16 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
+        // ---- funkcje testów ----
+
         public void SetTestQuantity(int quantity)
         {
             testQuantity = quantity;
+        }
+
+        public void SetTestDelay(int delay)
+        {
+            testDelay = delay;
         }
 
         public void GoTest()
@@ -266,8 +274,9 @@ namespace BoxBasisWF
             while (i < testQuantity)
             {
 
+
+
                 i++;
-                Console.WriteLine(i);
             }
 
         }
