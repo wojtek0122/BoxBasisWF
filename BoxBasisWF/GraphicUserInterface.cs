@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BoxBasisWF
@@ -134,12 +128,19 @@ namespace BoxBasisWF
 
         private void menu_btn_start_Click(object sender, EventArgs e)
         {
-            menu_btn_stop.Enabled = true;
-            menu_btn_start.Enabled = false;
-            menu_btn_open.Enabled = false;
-
-            //testy
-
+            if (!String.IsNullOrEmpty(menu_txt_batch.Text) && 
+                    !String.IsNullOrWhiteSpace(menu_txt_batch.Text) && 
+                    !String.IsNullOrEmpty(menu_txt_serial.Text) && 
+                    !String.IsNullOrWhiteSpace(menu_txt_serial.Text))
+            {
+                menu_btn_stop.Enabled = true;
+                menu_btn_start.Enabled = false;
+                menu_btn_open.Enabled = false;
+            }
+            else
+            {
+                Message("ERROR", "Batch and Serial is required!");
+            }
         }
 
         private void tmr_connection_open_Tick(object sender, EventArgs e)
