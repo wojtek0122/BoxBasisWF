@@ -179,6 +179,8 @@ namespace BoxBasisWF
             Console.WriteLine(@"Buzzer");
         }
 
+        //---------- odbieranie i wysylanie danych
+
         private void NewLineReceived(object sender, CommandEventArgs e)
         {
             _GUI.Message("RECEIVED", e.Command.CommandString());
@@ -267,18 +269,28 @@ namespace BoxBasisWF
             testDelay = delay;
         }
 
+        public void Wait(int ms)
+        {
+            DateTime start = DateTime.Now;
+            while ((DateTime.Now - start).TotalMilliseconds < ms) ;
+        }
+
         public void GoTest()
         {
-            int i = 0;
-
-            while (i < testQuantity)
-            {
-
-
-
-                i++;
-            }
-
+                GetVoltage();
+                SetMotorState(true);
+                GetSwitchBox();
+                Wait(testDelay);
+                GetSwitchTester();
+                Wait(testDelay);
+                SetCoilState(true);
+                Wait(testDelay);
+                SetMotorState(true);
+                Wait(testDelay);
+                SetLedOKState(true);
+                Wait(testDelay);
+                SetLedNOKState(true);
+                Wait(testDelay);
         }
     }
 }

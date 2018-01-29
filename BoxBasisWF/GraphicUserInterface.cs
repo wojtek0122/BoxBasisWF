@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace BoxBasisWF
 {
@@ -13,12 +14,19 @@ namespace BoxBasisWF
         private Graphics graphics;
         private Pen pen = new Pen(Color.Red, 2F);
 
+        private Thread th;
+        private int testCounter;
+        private bool onTest;
+
         public GraphicUserInterface()
         {
             InitializeComponent();
             InitializeOptionsLists();
             _boxBasisController = new BoxBasisController();
             _connectionData = new ConnectionData();
+
+            th = new Thread(_boxBasisController.GoTest);
+
         }
 
         private void InitializeOptionsLists()
@@ -81,6 +89,11 @@ namespace BoxBasisWF
             console_txt_log.ScrollToCaret();
         }
 
+        public void SetProgressBarValue(int progress)
+        {
+            pBar.Value = progress;
+        }
+
         private void options_btn_save_Click(object sender, EventArgs e)
         {
             _connectionData.PortName = options_cb_port.Text.ToString();
@@ -135,10 +148,19 @@ namespace BoxBasisWF
             {
                 menu_btn_start.Enabled = false;
                 menu_btn_open.Enabled = false;
+                menu_btn_stop.Enabled = true;
 
-                int.TryParse(options_txt_tests.Text, out int intdata);
-                _boxBasisController.SetTestQuantity(intdata);
-                _boxBasisController.GoTest();
+                int.TryParse(options_txt_tests.Text, out int inttestdata);
+                _boxBasisController.SetTestQuantity(inttestdata);
+                pBar.Maximum = inttestdata;
+
+                int.TryParse(options_txt_delays.Text, out int intdelaysdata);
+                _boxBasisController.SetTestDelay(intdelaysdata);
+
+                testCounter = 0;
+                onTest = true;
+                tmr_test.Enabled = true;
+
             }
             else
             {
@@ -209,5 +231,31 @@ namespace BoxBasisWF
             _boxBasisController.SetCoilState(true);
         }
 
+        private void menu_btn_stop_Click(object sender, EventArgs e)
+        {
+            tmr_test.Enabled = false;
+            if(th.IsAlive)
+            {
+                th.Abort();
+            }
+            menu_btn_stop.Enabled = false;
+        }
+
+        private void tmr_test_Tick(object sender, EventArgs e)
+        {
+            int.TryParse(options_txt_tests.Text, out int inttestdata);
+
+            if (testCounter<inttestdata)
+            {
+                th = new Thread(_boxBasisController.GoTest);
+                th.Start();
+                testCounter++;
+            }
+            else
+            {
+                tmr_test.Enabled = true;
+            }
+            SetProgressBarValue(testCounter);
+        }
     }
 }
