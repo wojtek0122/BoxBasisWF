@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CommandMessenger;
 using CommandMessenger.Queue;
 using CommandMessenger.Transport.Serial;
@@ -30,8 +31,11 @@ namespace BoxBasisWF
         private CmdMessenger            _cmdMessenger;
         private GraphicUserInterface    _GUI;
         private ConnectionData          _connectionData;
+        private List<String>            _listDataReceived;
+        private List<String>            _listDataSend;
         private int                     testQuantity;
         private int                     testDelay;
+        private bool                    onTest;
 
         // ----------------------- MAIN -----------------------
 
@@ -41,6 +45,8 @@ namespace BoxBasisWF
 
             _GUI = graphicUserInterface;
             _connectionData = connectionData;
+            _listDataReceived = new List<String>();
+            _listDataSend = new List<String>();
 
             _serialTransport = new SerialTransport();
             // -------------- WINFORMS SETTINGS --------------------
@@ -183,12 +189,22 @@ namespace BoxBasisWF
 
         private void NewLineReceived(object sender, CommandEventArgs e)
         {
+            if(onTest)
+            {
+                _listDataReceived.Add(e.Command.CommandString());
+            }
+
             _GUI.Message("RECEIVED", e.Command.CommandString());
             Console.WriteLine(@"Received > " + e.Command.CommandString());
         }
 
         private void NewLineSent(object sender, CommandEventArgs e)
         {
+            if(onTest)
+            {
+                _listDataSend.Add(e.Command.CommandString());
+            }
+
             _GUI.Message("SEND", e.Command.CommandString());
             Console.WriteLine(@"Sent > " + e.Command.CommandString());
         }
@@ -277,6 +293,8 @@ namespace BoxBasisWF
 
         public void GoTest()
         {
+            onTest = true;
+
                 GetVoltage();
                 SetMotorState(true);
                 GetSwitchBox();
@@ -291,6 +309,19 @@ namespace BoxBasisWF
                 Wait(testDelay);
                 SetLedNOKState(true);
                 Wait(testDelay);
+
+            onTest = false;
+        }
+
+        private void AnalyzeError()
+        {
+            if(!_listDataReceived[0].Equals("5.00"))
+            {
+                onTest = false;
+                
+            }
+
+
         }
     }
 }
