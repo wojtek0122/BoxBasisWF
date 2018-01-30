@@ -33,6 +33,7 @@ namespace BoxBasisWF
         private ConnectionData          _connectionData;
         private List<String>            _listDataReceived;
         private List<String>            _listDataSend;
+        private ExcelController         _excelController;
         private int                     testQuantity;
         private int                     testDelay;
         private bool                    onTest;
@@ -45,6 +46,7 @@ namespace BoxBasisWF
             _listDataReceived = new List<String>();
             _listDataSend = new List<String>();
             _serialTransport = new SerialTransport();
+            _excelController = new ExcelController();
         }
 
         //Setup function
@@ -191,6 +193,7 @@ namespace BoxBasisWF
             if(onTest)
             {
                 _listDataReceived.Add(e.Command.CommandString());
+                _excelController.AddData(e.Command.CommandString());
             }
 
             _GUI.Message("RECEIVED", e.Command.CommandString());

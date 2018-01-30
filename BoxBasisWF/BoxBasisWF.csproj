@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxBasisController.cs" />
+    <Compile Include="ExcelController.cs" />
     <Compile Include="GraphicUserInterface.cs">
       <SubType>Form</SubType>
     </Compile>
