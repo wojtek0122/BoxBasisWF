@@ -78,7 +78,7 @@ namespace BoxBasisWF
 
         public void Exit()
         {
-            if(_serialTransport != null)
+            if(_serialTransport.IsConnected())
             {
                 _cmdMessenger.Disconnect();
                 _cmdMessenger.Dispose();

@@ -120,7 +120,6 @@ namespace BoxBasisWF
 
         private void options_btn_disconnect_Click(object sender, EventArgs e)
         {
-            _boxBasisController.Exit();
             picBox_Connection.BackColor = Color.Red;
             Message("CONNECTION", "Disconnected!");
 
@@ -138,6 +137,8 @@ namespace BoxBasisWF
             options_cb_parity.Enabled = true;
             options_cb_port.Enabled = true;
             options_cb_stopbits.Enabled = true;
+
+            _boxBasisController.Exit();
         }
 
         private void menu_btn_start_Click(object sender, EventArgs e)
@@ -266,7 +267,7 @@ namespace BoxBasisWF
 
         private void GraphicUserInterface_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _boxBasisController.Exit();
+            //_boxBasisController.Exit();
         }
     }
 }
