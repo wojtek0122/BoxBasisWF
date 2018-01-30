@@ -19,7 +19,7 @@ namespace BoxBasisWF
             }
             else
             {
-                if(report.Workbook.Worksheets[report.Workbook.Worksheets.Count-1].Name != String.Format("{0:dd.MM.yyyy}", DateTime.Now))
+                if(report.Workbook.Worksheets[report.Workbook.Worksheets.Count].Name != String.Format("{0:dd.MM.yyyy}", DateTime.Now))
                 {
                     report.Workbook.Worksheets.Add(String.Format("{0:dd.MM.yyyy}", DateTime.Now));
                 }

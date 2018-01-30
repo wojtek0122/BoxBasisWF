@@ -31,6 +31,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.menu_btn_stop = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
@@ -74,7 +75,6 @@
             this.console_txt_log = new System.Windows.Forms.RichTextBox();
             this.tmr_connection_open = new System.Windows.Forms.Timer(this.components);
             this.tmr_test = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -102,6 +102,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Menu";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(195, 59);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // menu_btn_stop
             // 
@@ -528,16 +538,6 @@
             // 
             this.tmr_test.Interval = 1000;
             this.tmr_test.Tick += new System.EventHandler(this.tmr_test_Tick);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(195, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // GraphicUserInterface
             // 

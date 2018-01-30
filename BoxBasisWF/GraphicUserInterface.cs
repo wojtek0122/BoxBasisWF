@@ -22,8 +22,9 @@ namespace BoxBasisWF
         {
             InitializeComponent();
             InitializeOptionsLists();
-            _boxBasisController = new BoxBasisController();
             _connectionData = new ConnectionData();
+            _boxBasisController = new BoxBasisController();
+            _boxBasisController.Initialize(this, _connectionData);
 
             th = new Thread(_boxBasisController.GoTest);
 
@@ -110,7 +111,7 @@ namespace BoxBasisWF
 
         private void options_btn_connect_Click(object sender, EventArgs e)
         {
-            _boxBasisController.Setup(this, _connectionData);
+            _boxBasisController.Setup();
 
             options_btn_disconnect.Enabled = true;
             options_btn_connect.Enabled = false;
@@ -261,6 +262,11 @@ namespace BoxBasisWF
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void GraphicUserInterface_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _boxBasisController.Exit();
         }
     }
 }

@@ -39,20 +39,20 @@ namespace BoxBasisWF
         private bool                    onTest;
 
         // ----------------------- MAIN -----------------------
-
-        //Setup function
-        public void Setup(GraphicUserInterface graphicUserInterface, ConnectionData connectionData)
+        public void Initialize(GraphicUserInterface graphicUserInterface, ConnectionData connectionData)
         {
-
             _GUI = graphicUserInterface;
             _connectionData = connectionData;
             _listDataReceived = new List<String>();
             _listDataSend = new List<String>();
-
+            _excelReport = new ExcelReport();
             _serialTransport = new SerialTransport();
-            // -------------- WINFORMS SETTINGS --------------------
-            SetSerialSettings();
+        }
 
+        //Setup function
+        public void Setup()
+        {
+            SetSerialSettings();
             _cmdMessenger = new CmdMessenger(_serialTransport, BoardType.Bit16);
             _cmdMessenger.ControlToInvokeOn = _GUI;
             AttachCommandCallBacks();
