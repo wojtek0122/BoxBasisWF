@@ -257,5 +257,10 @@ namespace BoxBasisWF
             }
             SetProgressBarValue(testCounter);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

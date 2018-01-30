@@ -33,6 +33,7 @@ namespace BoxBasisWF
         private ConnectionData          _connectionData;
         private List<String>            _listDataReceived;
         private List<String>            _listDataSend;
+        private ExcelReport             _excelReport;
         private int                     testQuantity;
         private int                     testDelay;
         private bool                    onTest;

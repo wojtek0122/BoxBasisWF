@@ -64,8 +64,7 @@
       <DependentUpon>GraphicUserInterface.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionData.cs" />
-    <Compile Include="Obsolete\DataPacket.cs" />
-    <Compile Include="Obsolete\ExcelReport.cs" />
+    <Compile Include="ExcelReport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GraphicUserInterface.resx">
