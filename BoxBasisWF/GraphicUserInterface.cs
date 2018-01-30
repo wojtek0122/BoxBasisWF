@@ -260,14 +260,5 @@ namespace BoxBasisWF
             SetProgressBarValue(testCounter);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void GraphicUserInterface_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //_boxBasisController.Exit();
-        }
     }
 }

@@ -31,7 +31,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.menu_btn_stop = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
@@ -85,7 +84,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.menu_btn_stop);
             this.groupBox1.Controls.Add(this.pBar);
             this.groupBox1.Controls.Add(this.picBox_Connection);
@@ -102,16 +100,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Menu";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(195, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // menu_btn_stop
             // 
@@ -611,7 +599,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button menu_btn_stop;
         private System.Windows.Forms.Timer tmr_test;
-        private System.Windows.Forms.Button button1;
     }
 }
 

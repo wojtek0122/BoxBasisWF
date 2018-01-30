@@ -33,7 +33,6 @@ namespace BoxBasisWF
         private ConnectionData          _connectionData;
         private List<String>            _listDataReceived;
         private List<String>            _listDataSend;
-        private ExcelReport             _excelReport;
         private int                     testQuantity;
         private int                     testDelay;
         private bool                    onTest;
@@ -45,7 +44,6 @@ namespace BoxBasisWF
             _connectionData = connectionData;
             _listDataReceived = new List<String>();
             _listDataSend = new List<String>();
-            _excelReport = new ExcelReport();
             _serialTransport = new SerialTransport();
         }
 
