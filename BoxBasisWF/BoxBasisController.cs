@@ -17,7 +17,7 @@ namespace BoxBasisWF
         SetMotorTime,
         SetLedOK,
         SetLedNOK,
-        GetVoltage,
+        GetPSUVoltage,
         GetSwitchBox,
         GetSwitchTester,
         Buzzer,
@@ -98,7 +98,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetMotorTime, OnMotorTime);
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
-            _cmdMessenger.Attach((int)Command.GetVoltage, OnVoltage);
+            _cmdMessenger.Attach((int)Command.GetPSUVoltage, OnPSUVoltage);
             _cmdMessenger.Attach((int)Command.GetSwitchBox, OnSwitchBox);
             _cmdMessenger.Attach((int)Command.GetSwitchTester, OnSwitchTester);
             _cmdMessenger.Attach((int)Command.Buzzer, OnBuzzer);
@@ -162,7 +162,7 @@ namespace BoxBasisWF
             Console.WriteLine(@"Led NOK state changed");
         }
 
-        void OnVoltage(ReceivedCommand arguments)
+        void OnPSUVoltage(ReceivedCommand arguments)
         {
             _GUI.Message("INFO", @"Read voltage");
             Console.WriteLine(@"Read voltage");
@@ -249,9 +249,9 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
-        public void GetVoltage()
+        public void GetPSUVoltage()
         {
-            var command = new SendCommand((int)Command.GetVoltage);
+            var command = new SendCommand((int)Command.GetPSUVoltage);
             _cmdMessenger.SendCommand(command);
         }
 
@@ -297,7 +297,7 @@ namespace BoxBasisWF
         {
             onTest = true;
 
-                GetVoltage();
+                GetPSUVoltage();
                 SetMotorState(true);
                 GetSwitchBox();
                 Wait(testDelay);
