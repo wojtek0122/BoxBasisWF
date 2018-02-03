@@ -18,6 +18,7 @@ namespace BoxBasisWF
         SetLedOK,
         SetLedNOK,
         GetPSUVoltage,
+        GetBasisVoltage,
         GetSwitchBox,
         GetSwitchTester,
         Buzzer,
@@ -99,6 +100,7 @@ namespace BoxBasisWF
             _cmdMessenger.Attach((int)Command.SetLedOK, OnLedOK);
             _cmdMessenger.Attach((int)Command.SetLedNOK, OnLedNOK);
             _cmdMessenger.Attach((int)Command.GetPSUVoltage, OnPSUVoltage);
+            _cmdMessenger.Attach((int)Command.GetBasisVoltage, OnBasisVoltage);
             _cmdMessenger.Attach((int)Command.GetSwitchBox, OnSwitchBox);
             _cmdMessenger.Attach((int)Command.GetSwitchTester, OnSwitchTester);
             _cmdMessenger.Attach((int)Command.Buzzer, OnBuzzer);
@@ -164,8 +166,14 @@ namespace BoxBasisWF
 
         void OnPSUVoltage(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Read voltage");
-            Console.WriteLine(@"Read voltage");
+            _GUI.Message("INFO", @"Read psu voltage");
+            Console.WriteLine(@"Read psu voltage");
+        }
+
+        void OnBasisVoltage(ReceivedCommand arguments)
+        {
+            _GUI.Message("INFO", @"Read basis voltage");
+            Console.WriteLine(@"Read basis voltage");
         }
 
         void OnSwitchBox(ReceivedCommand arguments)
@@ -193,7 +201,7 @@ namespace BoxBasisWF
             if(onTest)
             {
                 _listDataReceived.Add(e.Command.CommandString());
-                _excelController.AddData(e.Command.CommandString());
+                //_excelController.AddData(e.Command.CommandString());
             }
 
             _GUI.Message("RECEIVED", e.Command.CommandString());
@@ -255,6 +263,12 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
+        public void GetBasisVoltage()
+        {
+            var command = new SendCommand((int)Command.GetBasisVoltage);
+            _cmdMessenger.SendCommand(command);
+        }
+
         public void GetSwitchBox()
         {
             var command = new SendCommand((int)Command.GetSwitchBox);
@@ -297,32 +311,190 @@ namespace BoxBasisWF
         {
             onTest = true;
 
-                GetPSUVoltage();
-                SetMotorState(true);
-                GetSwitchBox();
-                Wait(testDelay);
-                GetSwitchTester();
-                Wait(testDelay);
-                SetCoilState(true);
-                Wait(testDelay);
-                SetMotorState(true);
-                Wait(testDelay);
-                SetLedOKState(true);
-                Wait(testDelay);
-                SetLedNOKState(true);
-                Wait(testDelay);
+            for (int i = 0; i < testQuantity; i++)
+            {
+                _listDataSend.Add(_GUI.GetBatchNumber());
+                _listDataSend.Add(_GUI.GetSerialNumber());
+                switch (AnalyzeError(i))
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("Test " + i + " : OK");
+                            break;
+                        }
+                    case 1:
+                        {
+                            break;
+                        }
+
+                    case 2:
+                        {
+                            break;
+                        }
+                    case 3:
+                        {
+                            break;
+                        }
+                    case 4:
+                        {
+                            break;
+                        }
+                    case 5:
+                        {
+                            break;
+                        }
+                    case 6:
+                        {
+                            break;
+                        }
+                    case 7:
+                        {
+                            break;
+                        }
+                    case 8:
+                        {
+                            break;
+                        }
+                }
+
+                //Wpisuje linijke do raportu
+                //_listDataReceived.ToReport();
+                _listDataReceived.Clear();
+            }
 
             onTest = false;
         }
-
-        private void AnalyzeError()
+        
+        private int AnalyzeError(int testNumber)
         {
-            if(!_listDataReceived[0].Equals("5.00"))
-            {
-                onTest = false;
-                
-            }
+            float floatData;
+            int sIntData1;
+            int sIntData2;
 
+            Wait(testDelay);
+            GetPSUVoltage();
+            float.TryParse(_listDataReceived[2].ToString(), out floatData);
+            if (floatData > 20)
+            {
+                Wait(testDelay);
+                GetBasisVoltage();
+                float.TryParse(_listDataReceived[3].ToString(), out floatData);
+                if (floatData == 12)
+                {
+                    Wait(testDelay);
+                    GetSwitchTester();
+                    int.TryParse(_listDataReceived[4].ToString(), out sIntData1);
+                    Wait(testDelay);
+                    GetSwitchBox();
+                    int.TryParse(_listDataReceived[5].ToString(), out sIntData2);
+                    if (sIntData1 == 1 && sIntData2 == 1)
+                    {
+                        Wait(testDelay);
+                        SetCoilState(true);
+                        Wait(testDelay*3);
+                        GetBasisVoltage();
+                        float.TryParse(_listDataReceived[6].ToString(), out floatData);
+                        if (floatData > 11.5)
+                        {
+                            Wait(testDelay);
+                            GetSwitchTester();
+                            int.TryParse(_listDataReceived[7].ToString(), out sIntData1);
+                            Wait(testDelay);
+                            GetSwitchBox();
+                            int.TryParse(_listDataReceived[8].ToString(), out sIntData2);
+                            if (sIntData1 == 0 && sIntData2 == 0)
+                            {
+                                Wait(testDelay);
+                                SetMotorState(true);
+                                Wait(testDelay*5);
+                                GetSwitchTester();
+                                int.TryParse(_listDataReceived[9].ToString(), out sIntData1);
+                                Wait(testDelay);
+                                GetSwitchBox();
+                                int.TryParse(_listDataReceived[10].ToString(), out sIntData2);
+                                if (sIntData1 == 1 && sIntData2 == 1)
+                                {
+                                    //OK
+                                    Wait(testDelay);
+                                    SetLedOKState(true);
+                                    Buzzer(true, true);
+                                    return 0;
+                                }
+                                else
+                                {
+                                    //ERROR 8 - Uszkodzony tester - silnik
+                                    Wait(testDelay);
+                                    SetLedNOKState(true);
+                                    Buzzer(true, false);
+                                    return 8;
+                                }
+                            }
+                            else
+                            {
+                                if(testNumber == 1)
+                                {
+                                    //ERROR 7 - Uszkodzona cewka
+                                    Wait(testDelay);
+                                    SetLedNOKState(true);
+                                    Buzzer(true, false);
+                                    return 7;
+                                }
+                                else
+                                {
+                                    if(testNumber < 50)
+                                    {
+                                        //ERROR 6 - Uszkodzony MJD117
+                                        Wait(testDelay);
+                                        SetLedNOKState(true);
+                                        Buzzer(true, false);
+                                        return 6;
+                                    }
+                                    else
+                                    {
+                                        //ERROR 5 - Uszkodzony K2231
+                                        Wait(testDelay);
+                                        SetLedNOKState(true);
+                                        Buzzer(true, false);
+                                        return 5;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //ERROR 4 - Uszkodzone kondensatory
+                            Wait(testDelay);
+                            SetLedNOKState(true);
+                            Buzzer(true, false);
+                            return 4;
+                        }
+                    }
+                    else
+                    {
+                        //ERROR 3 - Uszkodzony micro-switch
+                        Wait(testDelay);
+                        SetLedNOKState(true);
+                        Buzzer(true, false);
+                        return 3;
+                    }
+                }
+                else
+                {
+                    //ERROR 2 - Uszkodzony LM314
+                    Wait(testDelay);
+                    SetLedNOKState(true);
+                    Buzzer(true, false);
+                    return 2;
+                }
+            }
+            else
+            {
+                //ERROR 1 - Uszkodzone gniazdo
+                Wait(testDelay);
+                SetLedNOKState(true);
+                Buzzer(true, false);
+                return 1;
+            }
 
         }
     }

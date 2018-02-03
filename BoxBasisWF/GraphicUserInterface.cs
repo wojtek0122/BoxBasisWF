@@ -32,6 +32,8 @@ namespace BoxBasisWF
 
         private void InitializeOptionsLists()
         {
+            graphics = picBox_board.CreateGraphics();
+
             options_cb_parity.Items.Clear();
             options_cb_stopbits.Items.Clear();
             options_cb_port.Items.Clear();
@@ -93,6 +95,60 @@ namespace BoxBasisWF
         public void SetProgressBarValue(int progress)
         {
             pBar.Value = progress;
+        }
+
+        public String GetBatchNumber()
+        {
+            return menu_txt_batch.Text;
+        }
+
+        public String GetSerialNumber()
+        {
+            return menu_txt_serial.Text;
+        }
+
+        public void DrawError(int error)
+        {
+            
+            switch (error)
+            {
+                case 1:
+                    {
+                        graphics.DrawRectangle(pen, 5, 30, 125, 115);
+                        break;
+                    }
+                case 2:
+                    {
+                        graphics.DrawRectangle(pen, 510, 25, 45, 45);
+                        graphics.DrawRectangle(pen, 445, 35, 60, 60);
+                        break;
+                    }
+                case 3:
+                    {
+                        //switch
+                        break;
+                    }
+                case 4:
+                    {
+                        graphics.DrawRectangle(pen, 200, 10, 240, 180);
+                        break;
+                    }
+                case 5:
+                    {
+                        graphics.DrawRectangle(pen, 435, 105, 80, 50);
+                        break;
+                    }
+                case 6:
+                    {
+                        graphics.DrawRectangle(pen, 145, 75, 70, 55);
+                        break;
+                    }
+                case 7:
+                    {
+                        //cewka
+                        break;
+                    }
+            }
         }
 
         private void options_btn_save_Click(object sender, EventArgs e)
