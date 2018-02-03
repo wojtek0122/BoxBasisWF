@@ -180,6 +180,7 @@ namespace BoxBasisWF
             Message("CONNECTION", "Disconnected!");
 
             menu_btn_open.Enabled = false;
+            menu_btn_close.Enabled = false;
             menu_btn_start.Enabled = false;
 
             options_btn_connect.Enabled = true;
@@ -206,6 +207,7 @@ namespace BoxBasisWF
             {
                 menu_btn_start.Enabled = false;
                 menu_btn_open.Enabled = false;
+                menu_btn_close.Enabled = false;
                 menu_btn_stop.Enabled = true;
 
                 int.TryParse(options_txt_tests.Text, out int inttestdata);
@@ -234,6 +236,7 @@ namespace BoxBasisWF
                 picBox_Connection.BackColor = Color.Green;
 
                 menu_btn_open.Enabled = true;
+                menu_btn_close.Enabled = true;
                 menu_btn_start.Enabled = true;
 
                 options_btn_set.Enabled = true;
@@ -253,6 +256,7 @@ namespace BoxBasisWF
                 picBox_Connection.BackColor = Color.Red;
 
                 menu_btn_open.Enabled = false;
+                menu_btn_close.Enabled = false;
                 menu_btn_start.Enabled = false;
 
                 options_btn_connect.Enabled = true;
@@ -316,5 +320,9 @@ namespace BoxBasisWF
             SetProgressBarValue(testCounter);
         }
 
+        private void menu_btn_close_Click(object sender, EventArgs e)
+        {
+            _boxBasisController.SetMotorState(true);
+        }
     }
 }

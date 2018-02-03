@@ -74,6 +74,7 @@
             this.console_txt_log = new System.Windows.Forms.RichTextBox();
             this.tmr_connection_open = new System.Windows.Forms.Timer(this.components);
             this.tmr_test = new System.Windows.Forms.Timer(this.components);
+            this.menu_btn_close = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.menu_btn_close);
             this.groupBox1.Controls.Add(this.menu_btn_stop);
             this.groupBox1.Controls.Add(this.pBar);
             this.groupBox1.Controls.Add(this.picBox_Connection);
@@ -114,7 +116,7 @@
             // 
             // pBar
             // 
-            this.pBar.Location = new System.Drawing.Point(14, 108);
+            this.pBar.Location = new System.Drawing.Point(14, 95);
             this.pBar.Maximum = 199;
             this.pBar.Name = "pBar";
             this.pBar.Size = new System.Drawing.Size(247, 21);
@@ -186,7 +188,7 @@
             // menu_btn_open
             // 
             this.menu_btn_open.Enabled = false;
-            this.menu_btn_open.Location = new System.Drawing.Point(14, 148);
+            this.menu_btn_open.Location = new System.Drawing.Point(14, 121);
             this.menu_btn_open.Name = "menu_btn_open";
             this.menu_btn_open.Size = new System.Drawing.Size(75, 23);
             this.menu_btn_open.TabIndex = 9;
@@ -527,6 +529,17 @@
             this.tmr_test.Interval = 1000;
             this.tmr_test.Tick += new System.EventHandler(this.tmr_test_Tick);
             // 
+            // menu_btn_close
+            // 
+            this.menu_btn_close.Enabled = false;
+            this.menu_btn_close.Location = new System.Drawing.Point(14, 148);
+            this.menu_btn_close.Name = "menu_btn_close";
+            this.menu_btn_close.Size = new System.Drawing.Size(75, 23);
+            this.menu_btn_close.TabIndex = 19;
+            this.menu_btn_close.Text = "Close";
+            this.menu_btn_close.UseVisualStyleBackColor = true;
+            this.menu_btn_close.Click += new System.EventHandler(this.menu_btn_close_Click);
+            // 
             // GraphicUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -599,6 +612,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button menu_btn_stop;
         private System.Windows.Forms.Timer tmr_test;
+        private System.Windows.Forms.Button menu_btn_close;
     }
 }
 
