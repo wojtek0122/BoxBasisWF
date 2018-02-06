@@ -15,8 +15,8 @@ namespace BoxBasisWF
         private Pen pen = new Pen(Color.Red, 2F);
 
         private Thread th;
-        private int testCounter;
-        private bool onTest;
+        public int testCounter;
+        public bool onTest;
 
         public GraphicUserInterface()
         {
@@ -53,7 +53,19 @@ namespace BoxBasisWF
             options_cb_stopbits.Text = options_cb_stopbits.Items[1].ToString();
         }
 
-        public void Message(string type, string message)
+        public void Message(string messageType, string messageText)
+        {
+            if(console_txt_log.InvokeRequired)
+            {
+                console_txt_log.Invoke(new Action<string, string>(InvokedMessage), messageType, messageText);
+            }
+            else
+            {
+                InvokedMessage(messageType, messageText);
+            }
+        }
+
+        public void InvokedMessage(string type, string message)
         {
             switch (type)
             {
@@ -217,9 +229,13 @@ namespace BoxBasisWF
                 int.TryParse(options_txt_delays.Text, out int intdelaysdata);
                 _boxBasisController.SetTestDelay(intdelaysdata);
 
+                picBox_board.Invalidate();
                 testCounter = 0;
                 onTest = true;
+                tmr_test.Interval = (intdelaysdata * 35) + 1000;
                 tmr_test.Enabled = true;
+                _boxBasisController.ClearReceivedList();
+                console_txt_log.Clear();
 
             }
             else
@@ -307,7 +323,7 @@ namespace BoxBasisWF
         {
             int.TryParse(options_txt_tests.Text, out int inttestdata);
 
-            if (testCounter<inttestdata)
+            if (testCounter<inttestdata && onTest)
             {
                 th = new Thread(_boxBasisController.GoTest);
                 th.Start();

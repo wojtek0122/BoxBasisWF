@@ -12,65 +12,72 @@ namespace BoxBasisWF
     class ExcelController
     {
         ExcelPackage xlPackage;
-        ExcelWorksheets xlWorksheets;
-        string filePath = @"C:\report\report.xlsx";
-        int rows;
-        int columns = 1;
+        ExcelWorksheet xlWorksheet;
+        string filePath = @"C:\report\";
+        int rows = 2;
 
-        public ExcelController()
+        public void SaveBatchData(List<String> list)
         {
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath + list[0].ToString() + ".xlsx"))
             {
-                var newFile = new FileInfo(filePath);
-                using (xlPackage = new ExcelPackage(newFile))
-                {
-                    xlPackage.Workbook.Worksheets.Add(String.Format("{0:dd.MM.yyyy}", DateTime.Now));
-                    FillHeader();
-                    xlPackage.Save();
-                }
+                var newFile = new FileInfo(filePath+list[0].ToString()+".xlsx");
+                xlPackage = new ExcelPackage(newFile);
+                xlWorksheet = xlPackage.Workbook.Worksheets.Add(list[0].ToString());
             }
+            else
+            {
+                FileInfo existingFile = new FileInfo(filePath + list[0].ToString() + ".xlsx");
+                xlPackage = new ExcelPackage(existingFile);
+                xlWorksheet = xlPackage.Workbook.Worksheets[1];
+            }
+            FillHeader();
+            FillData(list);
+            xlPackage.Save();
+        }
+
+        public void FillData(List<String> list)
+        {
+            for (int i=0; i<16; i++)
+            {
+                xlWorksheet.Cells[rows, i+1].Value = list[i].ToString();
+            }
+            rows++;
         }
 
         public void FillHeader()
         {
-            xlWorksheets = xlPackage.Workbook.Worksheets;
 
-            xlWorksheets[xlWorksheets.Count].Cells[1, 1].Value = "Batch";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 2].Value = "Serial";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 3].Value = "Voltage";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 4].Value = "Motor";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 5].Value = "SwitchBox";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 6].Value = "SwitchTester";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 7].Value = "Coil";
-            xlWorksheets[xlWorksheets.Count].Cells[1, 8].Value = "Capacitor";
+            xlWorksheet.Cells[1, 1].Value = "Batch";
+            xlWorksheet.Cells[1, 2].Value = "Serial";
+            xlWorksheet.Cells[1, 3].Value = "MainVoltage";
+            xlWorksheet.Cells[1, 4].Value = "BasisVoltage";
+            xlWorksheet.Cells[1, 5].Value = "SwitchTester";
+            xlWorksheet.Cells[1, 6].Value = "SwitchBox";
+            xlWorksheet.Cells[1, 7].Value = "CoilState1";
+            xlWorksheet.Cells[1, 8].Value = "CoilState2";
+            xlWorksheet.Cells[1, 9].Value = "BasisVoltage";
+            xlWorksheet.Cells[1, 10].Value = "SwitchTester";
+            xlWorksheet.Cells[1, 11].Value = "SwitchBox";
+            xlWorksheet.Cells[1, 12].Value = "MotorState1";
+            xlWorksheet.Cells[1, 13].Value = "MotorState2";
+            xlWorksheet.Cells[1, 14].Value = "SwitchTester";
+            xlWorksheet.Cells[1, 15].Value = "SwitchBox";
+            xlWorksheet.Cells[1, 16].Value = "Result";
 
-            ExcelRange row = xlWorksheets[xlWorksheets.Count].Cells["A1:H1"];
+            ExcelRange row = xlWorksheet.Cells["A1:P1"];
             {
                 row.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 row.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(23, 55, 93));
                 row.Style.Font.Color.SetColor(System.Drawing.Color.White);
                 row.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                row.AutoFitColumns();
             }
 
         }
-
+        
         public void SaveReport()
         {
             xlPackage.Save();
         }
-
-        public void AddData(String data)
-        {
-            xlWorksheets = xlPackage.Workbook.Worksheets;
-            if (columns>9)
-            {
-                columns = 1;
-                rows++;
-            }
-            columns++;
-            xlWorksheets[xlWorksheets.Count].Cells[rows, columns].Value = data;
-            xlPackage.Save();
-        }
-
     }
 }

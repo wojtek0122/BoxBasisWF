@@ -6,7 +6,7 @@ using CommandMessenger.Transport.Serial;
 
 namespace BoxBasisWF
 {
-    //1. Dodaj komende do enum
+
     enum Command
     {
         Acknowledge,            
@@ -37,7 +37,6 @@ namespace BoxBasisWF
         private ExcelController         _excelController;
         private int                     testQuantity;
         private int                     testDelay;
-        private bool                    onTest;
 
         // ----------------------- MAIN -----------------------
         public void Initialize(GraphicUserInterface graphicUserInterface, ConnectionData connectionData)
@@ -87,7 +86,11 @@ namespace BoxBasisWF
             }
         }
 
-        //2. Przypisz callback do metody
+        public void ClearReceivedList()
+        {
+            _listDataReceived.Clear();
+        }
+
         private void AttachCommandCallBacks()
         {
             _cmdMessenger.Attach(OnUnknownCommand);
@@ -126,82 +129,77 @@ namespace BoxBasisWF
             Console.WriteLine(@"Arduino has experienced an error");
         }
 
-        //3.Napisz funkcje Callback
-
         void OnCoil(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Coil state changed");
+//            _GUI.Message("INFO", @"Coil state changed");
             Console.WriteLine(@"Coil state changed");
         }
 
         void OnCoilTime(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Coil time changed");
+//            _GUI.Message("INFO", @"Coil time changed");
             Console.WriteLine(@"Coil time changed");
         }
 
         void OnMotor(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Motor state changed");
+//            _GUI.Message("INFO", @"Motor state changed");
             Console.WriteLine(@"Motor state changed");
         }
 
         void OnMotorTime(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Motor time changed");
+//            _GUI.Message("INFO", @"Motor time changed");
             Console.WriteLine(@"Motor time changed");
         }
 
         void OnLedOK(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Led OK state changed");
+//            _GUI.Message("INFO", @"Led OK state changed");
             Console.WriteLine(@"Led OK state changed");
         }
 
         void OnLedNOK(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Led NOK state changed");
+//            _GUI.Message("INFO", @"Led NOK state changed");
             Console.WriteLine(@"Led NOK state changed");
         }
 
         void OnPSUVoltage(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Read psu voltage");
+//            _GUI.Message("INFO", @"Read psu voltage");
             Console.WriteLine(@"Read psu voltage");
         }
 
         void OnBasisVoltage(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Read basis voltage");
+//            _GUI.Message("INFO", @"Read basis voltage");
             Console.WriteLine(@"Read basis voltage");
         }
 
         void OnSwitchBox(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Switch box state");
+//            _GUI.Message("INFO", @"Switch box state");
             Console.WriteLine(@"Switch box state");
         }
 
         void OnSwitchTester(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Switch tester state");
+//            _GUI.Message("INFO", @"Switch tester state");
             Console.WriteLine(@"Switch tester state");
         }
 
         void OnBuzzer(ReceivedCommand arguments)
         {
-            _GUI.Message("INFO", @"Buzzer");
+//            _GUI.Message("INFO", @"Buzzer");
             Console.WriteLine(@"Buzzer");
         }
 
-        //---------- odbieranie i wysylanie danych
-
         private void NewLineReceived(object sender, CommandEventArgs e)
         {
-            if(onTest)
+            if(_GUI.onTest)
             {
                 _listDataReceived.Add(e.Command.CommandString());
-                //_excelController.AddData(e.Command.CommandString());
             }
 
             _GUI.Message("RECEIVED", e.Command.CommandString());
@@ -210,16 +208,16 @@ namespace BoxBasisWF
 
         private void NewLineSent(object sender, CommandEventArgs e)
         {
-            if(onTest)
+            if(_GUI.onTest)
             {
                 _listDataSend.Add(e.Command.CommandString());
             }
 
-            _GUI.Message("SEND", e.Command.CommandString());
+//            _GUI.Message("SEND", e.Command.CommandString());
             Console.WriteLine(@"Sent > " + e.Command.CommandString());
         }
 
-        //4.Napisz funkcje wysłania komendy
+
 
         public void SetCoilState(bool coilState)
         {
@@ -289,7 +287,7 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
-        // ---- funkcje testów ----
+        // ---- TEST FUNCTION ----
 
         public void SetTestQuantity(int quantity)
         {
@@ -307,62 +305,102 @@ namespace BoxBasisWF
             while ((DateTime.Now - start).TotalMilliseconds < ms) ;
         }
 
+        public void dodaj(List<String> list)
+        {
+            _excelController.SaveBatchData(_listDataReceived);
+        }
+
         public void GoTest()
         {
-            onTest = true;
 
-            for (int i = 0; i < testQuantity; i++)
+            _listDataReceived.Add(_GUI.GetBatchNumber());
+            _listDataReceived.Add(_GUI.GetSerialNumber());
+            switch (AnalyzeError(_GUI.testCounter))
             {
-                _listDataSend.Add(_GUI.GetBatchNumber());
-                _listDataSend.Add(_GUI.GetSerialNumber());
-                switch (AnalyzeError(i))
-                {
-                    case 0:
-                        {
-                            Console.WriteLine("Test " + i + " : OK");
-                            break;
-                        }
-                    case 1:
-                        {
-                            break;
-                        }
+                case 0:
+                    {
+                        Console.WriteLine("Test " + _GUI.testCounter + " : OK");
+                        _GUI.Message("INFO", "Test " + _GUI.testCounter + " : OK");
+                        _listDataReceived.Add("OK");
+                        break;
+                    }
+                case 1:
+                    {
+                        _GUI.DrawError(1);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzone gniazdo");
+                        _listDataReceived.Add("1");
+                        break;
+                    }
 
-                    case 2:
-                        {
-                            break;
-                        }
-                    case 3:
-                        {
-                            break;
-                        }
-                    case 4:
-                        {
-                            break;
-                        }
-                    case 5:
-                        {
-                            break;
-                        }
-                    case 6:
-                        {
-                            break;
-                        }
-                    case 7:
-                        {
-                            break;
-                        }
-                    case 8:
-                        {
-                            break;
-                        }
-                }
-
-                //Wpisuje linijke do raportu
-                //_listDataReceived.ToReport();
-                _listDataReceived.Clear();
+                case 2:
+                    {
+                        _GUI.DrawError(2);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzony LM314");
+                        _listDataReceived.Add("2");
+                        break;
+                    }
+                case 3:
+                    {
+                        _GUI.DrawError(3);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzony micro-switch");
+                        _listDataReceived.Add("3");
+                        break;
+                    }
+                case 4:
+                    {
+                        _GUI.DrawError(4);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzone kondensatory");
+                        _listDataReceived.Add("4");
+                        break;
+                    }
+                case 5:
+                    {
+                        _GUI.DrawError(5);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzony K2231");
+                        _listDataReceived.Add("5");
+                        break;
+                    }
+                case 6:
+                    {
+                        _GUI.DrawError(6);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzony MJD117");
+                        _listDataReceived.Add("6");
+                        break;
+                    }
+                case 7:
+                    {
+                        _GUI.DrawError(7);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzona cewka");
+                        _listDataReceived.Add("7");
+                        break;
+                    }
+                case 8:
+                    {
+                        _GUI.DrawError(8);
+                        _GUI.onTest = false;
+                        SetLedNOKState(true);
+                        _GUI.Message("ERROR", "Uszkodzony tester - silnik");
+                        _listDataReceived.Add("8");
+                        break;
+                    }
             }
 
-            onTest = false;
+            _excelController.SaveBatchData(_listDataReceived);
+            ClearReceivedList();
         }
         
         private int AnalyzeError(int testNumber)
@@ -373,45 +411,54 @@ namespace BoxBasisWF
 
             Wait(testDelay);
             GetPSUVoltage();
-            float.TryParse(_listDataReceived[2].ToString(), out floatData);
-            if (floatData > 20)
+            Wait(testDelay);
+            float.TryParse(_listDataReceived[2].Replace('.',',').Substring(2, 5).ToString(), out floatData);
+            if (floatData > 20.0)
             {
                 Wait(testDelay);
                 GetBasisVoltage();
-                float.TryParse(_listDataReceived[3].ToString(), out floatData);
-                if (floatData == 12)
+                Wait(testDelay);
+                float.TryParse(_listDataReceived[3].Replace('.', ',').Substring(2, 5).ToString(), out floatData);
+                if (floatData > 12.0)
                 {
                     Wait(testDelay);
                     GetSwitchTester();
-                    int.TryParse(_listDataReceived[4].ToString(), out sIntData1);
+                    Wait(testDelay);
+                    int.TryParse(_listDataReceived[4].Substring(3,1).ToString(), out sIntData1);
                     Wait(testDelay);
                     GetSwitchBox();
-                    int.TryParse(_listDataReceived[5].ToString(), out sIntData2);
+                    Wait(testDelay);
+                    int.TryParse(_listDataReceived[5].Substring(3,1).ToString(), out sIntData2);
                     if (sIntData1 == 1 && sIntData2 == 1)
                     {
-                        Wait(testDelay);
+                        Wait(testDelay*3);
                         SetCoilState(true);
                         Wait(testDelay*3);
                         GetBasisVoltage();
-                        float.TryParse(_listDataReceived[6].ToString(), out floatData);
-                        if (floatData > 11.5)
+                        Wait(testDelay);
+                        float.TryParse(_listDataReceived[10].Replace('.', ',').Substring(2, 5).ToString(), out floatData);
+                        if (floatData >= 0)
                         {
                             Wait(testDelay);
                             GetSwitchTester();
-                            int.TryParse(_listDataReceived[7].ToString(), out sIntData1);
+                            Wait(testDelay);
+                            int.TryParse(_listDataReceived[11].Substring(3, 1).ToString(), out sIntData1);
                             Wait(testDelay);
                             GetSwitchBox();
-                            int.TryParse(_listDataReceived[8].ToString(), out sIntData2);
+                            Wait(testDelay);
+                            int.TryParse(_listDataReceived[12].Substring(3, 1).ToString(), out sIntData2);
                             if (sIntData1 == 0 && sIntData2 == 0)
                             {
                                 Wait(testDelay);
                                 SetMotorState(true);
                                 Wait(testDelay*5);
                                 GetSwitchTester();
-                                int.TryParse(_listDataReceived[9].ToString(), out sIntData1);
+                                Wait(testDelay);
+                                int.TryParse(_listDataReceived[17].Substring(3, 1).ToString(), out sIntData1);
                                 Wait(testDelay);
                                 GetSwitchBox();
-                                int.TryParse(_listDataReceived[10].ToString(), out sIntData2);
+                                Wait(testDelay);
+                                int.TryParse(_listDataReceived[18].Substring(3, 1).ToString(), out sIntData2);
                                 if (sIntData1 == 1 && sIntData2 == 1)
                                 {
                                     //OK
@@ -480,7 +527,7 @@ namespace BoxBasisWF
                 }
                 else
                 {
-                    //ERROR 2 - Uszkodzony LM314
+                    //ERROR 2 - Uszkodzony LM317
                     Wait(testDelay);
                     SetLedNOKState(true);
                     Buzzer(true, false);

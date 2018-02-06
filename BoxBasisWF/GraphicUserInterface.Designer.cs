@@ -31,6 +31,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.menu_btn_close = new System.Windows.Forms.Button();
             this.menu_btn_stop = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.picBox_Connection = new System.Windows.Forms.PictureBox();
@@ -74,7 +75,6 @@
             this.console_txt_log = new System.Windows.Forms.RichTextBox();
             this.tmr_connection_open = new System.Windows.Forms.Timer(this.components);
             this.tmr_test = new System.Windows.Forms.Timer(this.components);
-            this.menu_btn_close = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Connection)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -102,6 +102,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Menu";
+            // 
+            // menu_btn_close
+            // 
+            this.menu_btn_close.Enabled = false;
+            this.menu_btn_close.Location = new System.Drawing.Point(14, 148);
+            this.menu_btn_close.Name = "menu_btn_close";
+            this.menu_btn_close.Size = new System.Drawing.Size(75, 23);
+            this.menu_btn_close.TabIndex = 19;
+            this.menu_btn_close.Text = "Close";
+            this.menu_btn_close.UseVisualStyleBackColor = true;
+            this.menu_btn_close.Click += new System.EventHandler(this.menu_btn_close_Click);
             // 
             // menu_btn_stop
             // 
@@ -148,6 +159,7 @@
             this.menu_txt_serial.Name = "menu_txt_serial";
             this.menu_txt_serial.Size = new System.Drawing.Size(134, 20);
             this.menu_txt_serial.TabIndex = 14;
+            this.menu_txt_serial.Text = "N/A";
             // 
             // menu_txt_batch
             // 
@@ -155,6 +167,7 @@
             this.menu_txt_batch.Name = "menu_txt_batch";
             this.menu_txt_batch.Size = new System.Drawing.Size(134, 20);
             this.menu_txt_batch.TabIndex = 13;
+            this.menu_txt_batch.Text = "433156";
             // 
             // label5
             // 
@@ -234,7 +247,7 @@
             // options_btn_set
             // 
             this.options_btn_set.Enabled = false;
-            this.options_btn_set.Location = new System.Drawing.Point(156, 103);
+            this.options_btn_set.Location = new System.Drawing.Point(156, 114);
             this.options_btn_set.Name = "options_btn_set";
             this.options_btn_set.Size = new System.Drawing.Size(63, 23);
             this.options_btn_set.TabIndex = 30;
@@ -254,7 +267,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(248, 83);
+            this.label14.Location = new System.Drawing.Point(248, 94);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(26, 13);
             this.label14.TabIndex = 28;
@@ -262,16 +275,16 @@
             // 
             // options_txt_coil_time
             // 
-            this.options_txt_coil_time.Location = new System.Drawing.Point(193, 81);
+            this.options_txt_coil_time.Location = new System.Drawing.Point(193, 92);
             this.options_txt_coil_time.Name = "options_txt_coil_time";
             this.options_txt_coil_time.Size = new System.Drawing.Size(55, 20);
             this.options_txt_coil_time.TabIndex = 27;
-            this.options_txt_coil_time.Text = "50";
+            this.options_txt_coil_time.Text = "100";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(127, 84);
+            this.label15.Location = new System.Drawing.Point(127, 95);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(49, 13);
             this.label15.TabIndex = 26;
@@ -280,7 +293,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(248, 62);
+            this.label12.Location = new System.Drawing.Point(248, 73);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(26, 13);
             this.label12.TabIndex = 25;
@@ -288,7 +301,7 @@
             // 
             // options_txt_motor_time
             // 
-            this.options_txt_motor_time.Location = new System.Drawing.Point(193, 60);
+            this.options_txt_motor_time.Location = new System.Drawing.Point(193, 71);
             this.options_txt_motor_time.Name = "options_txt_motor_time";
             this.options_txt_motor_time.Size = new System.Drawing.Size(55, 20);
             this.options_txt_motor_time.TabIndex = 24;
@@ -297,7 +310,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(127, 63);
+            this.label13.Location = new System.Drawing.Point(127, 74);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(59, 13);
             this.label13.TabIndex = 23;
@@ -427,7 +440,7 @@
             this.options_txt_delays.Name = "options_txt_delays";
             this.options_txt_delays.Size = new System.Drawing.Size(55, 20);
             this.options_txt_delays.TabIndex = 8;
-            this.options_txt_delays.Text = "300";
+            this.options_txt_delays.Text = "250";
             // 
             // label7
             // 
@@ -444,7 +457,7 @@
             this.options_txt_tests.Name = "options_txt_tests";
             this.options_txt_tests.Size = new System.Drawing.Size(55, 20);
             this.options_txt_tests.TabIndex = 6;
-            this.options_txt_tests.Text = "200";
+            this.options_txt_tests.Text = "10";
             // 
             // label6
             // 
@@ -526,19 +539,8 @@
             // 
             // tmr_test
             // 
-            this.tmr_test.Interval = 1000;
+            this.tmr_test.Interval = 250;
             this.tmr_test.Tick += new System.EventHandler(this.tmr_test_Tick);
-            // 
-            // menu_btn_close
-            // 
-            this.menu_btn_close.Enabled = false;
-            this.menu_btn_close.Location = new System.Drawing.Point(14, 148);
-            this.menu_btn_close.Name = "menu_btn_close";
-            this.menu_btn_close.Size = new System.Drawing.Size(75, 23);
-            this.menu_btn_close.TabIndex = 19;
-            this.menu_btn_close.Text = "Close";
-            this.menu_btn_close.UseVisualStyleBackColor = true;
-            this.menu_btn_close.Click += new System.EventHandler(this.menu_btn_close_Click);
             // 
             // GraphicUserInterface
             // 
