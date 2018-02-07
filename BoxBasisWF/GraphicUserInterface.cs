@@ -165,16 +165,24 @@ namespace BoxBasisWF
 
         private void options_btn_save_Click(object sender, EventArgs e)
         {
-            _connectionData.PortName = options_cb_port.Text.ToString();
-            Int32.TryParse(options_cb_baudrate.Text, out var value);
-            _connectionData.BaudRate = value;
-            Int32.TryParse(options_cb_databits.Text, out value);
-            _connectionData.DataBits = value;
-            _connectionData.DtrEnabled = true;
-            _connectionData.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), options_cb_parity.Text);
-            _connectionData.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), options_cb_stopbits.Text);
+            if(String.IsNullOrEmpty(options_cb_port.Text.ToString()) || String.IsNullOrWhiteSpace(options_cb_port.Text.ToString()))
+            {
+                Message("ERROR", "COM not recognized!");
+            }
+            else
+            {
+                _connectionData.PortName = options_cb_port.Text.ToString();
+                Int32.TryParse(options_cb_baudrate.Text, out var value);
+                _connectionData.BaudRate = value;
+                Int32.TryParse(options_cb_databits.Text, out value);
+                _connectionData.DataBits = value;
+                _connectionData.DtrEnabled = true;
+                _connectionData.Parity = (System.IO.Ports.Parity)Enum.Parse(typeof(System.IO.Ports.Parity), options_cb_parity.Text);
+                _connectionData.StopBits = (System.IO.Ports.StopBits)Enum.Parse(typeof(System.IO.Ports.StopBits), options_cb_stopbits.Text);
 
-            options_btn_connect.Enabled = true;
+                options_btn_connect.Enabled = true;
+            }
+            
         }
 
         private void options_btn_connect_Click(object sender, EventArgs e)
