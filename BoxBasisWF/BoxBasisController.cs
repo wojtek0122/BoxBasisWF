@@ -26,7 +26,7 @@ namespace BoxBasisWF
 
     public class BoxBasisController
     {
-        //Variables
+        // ----------------------- VARIABLES -----------------------
 
         private SerialTransport         _serialTransport;
         private CmdMessenger            _cmdMessenger;
@@ -287,7 +287,7 @@ namespace BoxBasisWF
             _cmdMessenger.SendCommand(command);
         }
 
-        // ---- TEST FUNCTION ----
+        // ----------------------- TEST FUNCTIONS -----------------------
 
         public void SetTestQuantity(int quantity)
         {
@@ -419,7 +419,7 @@ namespace BoxBasisWF
                 GetBasisVoltage();
                 Wait(testDelay);
                 float.TryParse(_listDataReceived[3].Replace('.', ',').Substring(2, 5).ToString(), out floatData);
-                if (floatData > 12.0)
+                if (floatData > 11.5)
                 {
                     Wait(testDelay);
                     GetSwitchTester();

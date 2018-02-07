@@ -157,7 +157,7 @@ namespace BoxBasisWF
                     }
                 case 7:
                     {
-                        //cewka
+                        //coil
                         break;
                     }
             }

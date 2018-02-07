@@ -159,7 +159,6 @@
             this.menu_txt_serial.Name = "menu_txt_serial";
             this.menu_txt_serial.Size = new System.Drawing.Size(134, 20);
             this.menu_txt_serial.TabIndex = 14;
-            this.menu_txt_serial.Text = "N/A";
             // 
             // menu_txt_batch
             // 
@@ -167,7 +166,6 @@
             this.menu_txt_batch.Name = "menu_txt_batch";
             this.menu_txt_batch.Size = new System.Drawing.Size(134, 20);
             this.menu_txt_batch.TabIndex = 13;
-            this.menu_txt_batch.Text = "433156";
             // 
             // label5
             // 
@@ -457,7 +455,7 @@
             this.options_txt_tests.Name = "options_txt_tests";
             this.options_txt_tests.Size = new System.Drawing.Size(55, 20);
             this.options_txt_tests.TabIndex = 6;
-            this.options_txt_tests.Text = "10";
+            this.options_txt_tests.Text = "100";
             // 
             // label6
             // 
